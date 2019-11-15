@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isActive = false;
   isCollapsed = false;
+
+  // constructor(db: AngularFireDatabase) {
+  //   db.list('/users1/ggID').snapshotChanges().subscribe((snapshots) => {
+  //     console.log(snapshots);
+  //   });
+  // }
 }
