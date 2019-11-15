@@ -1,4 +1,5 @@
 <nz-layout class="app-layout">
+  <!-- App sidebar -->
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
@@ -9,7 +10,7 @@
   >
     <div class="sidebar-logo">
       <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-      <h1>Smart Home Angular</h1>
+      <h1>Smart Home</h1>
     </div>
 
     <div style="width: 100%; margin: 10px; padding: 0 10px;">
@@ -29,19 +30,19 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <!-- <li nz-submenu nzOpen nzTitle="Houses" nzIcon="dashboard"> -->
-      <ul>
-        <li nz-menu-item nzMatchRouter>
-          <a routerLink="/welcome">Villa 1</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a>Villa 2</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-          <a>Villa 3</a>
-        </li>
-      </ul>
-      <!-- </li> -->
+      <li nz-submenu nzOpen nzTitle="Groups" nzIcon="dashboard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/welcome">Villa 1</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Villa 2</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Villa 3</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nz-sider>
   <nz-layout>
@@ -58,9 +59,7 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <button nz-button nzType="primary" (click)="isActive = !isActive">
-          Click me
-        </button>
+        <app-home-view></app-home-view>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
