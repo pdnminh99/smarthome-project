@@ -16,6 +16,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { ChartsModule } from 'ng2-charts';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { ModuleViewComponent } from './components/module-view/module-view.component';
 
 registerLocaleData(en);
 
@@ -23,6 +24,7 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     ChartsComponent,
+    ModuleViewComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
