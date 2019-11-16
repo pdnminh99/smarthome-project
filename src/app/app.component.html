@@ -3,60 +3,39 @@
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
-    nzWidth="256px"
+    nzWidth="200px"
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
   >
     <div class="sidebar-logo">
-      <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+      <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo"/>
       <h1>Smart Home</h1>
     </div>
-
-    <div style="width: 100%; margin: 10px; padding: 0 10px;">
-      <button
-        *ngIf="!isCollapsed"
-        nz-button
-        nzType="primary"
-        style="margin: 0 auto;"
-      >
-        <i nz-icon nzType="plus-circle" nzTheme="fill"></i> Create group
-      </button>
-    </div>
-
     <ul
       nz-menu
       nzTheme="dark"
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="Groups" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Villa 1</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Villa 2</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Villa 3</a>
-          </li>
-        </ul>
-      </li>
+      <app-create-group-button *ngIf="!isCollapsed"
+                               style="width: 100%; margin: 10px; padding: 0 10px;"></app-create-group-button>
+      <app-sidenav-submenu [title]="'Personalize'" [icon]="'tool'"></app-sidenav-submenu>
+      <app-sidenav-submenu [title]="'Group'" [icon]="'book'"></app-sidenav-submenu>
     </ul>
   </nz-sider>
   <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+    <!--    <nz-header>-->
+    <!--      <div class="app-header">-->
+    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i
             class="trigger"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></i>
         </span>
-      </div>
-    </nz-header>
+    <!--      </div>-->
+    <!--    </nz-header>-->
     <nz-content>
       <div class="inner-content">
         <app-home-view></app-home-view>
