@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {NavigationItem} from '../../../models/NavigationItem';
+import {DatabaseService} from '../../../services/Database/database.service';
 
 @Component({
   selector: 'app-sidenav-submenu',
@@ -9,18 +9,12 @@ import {NavigationItem} from '../../../models/NavigationItem';
 export class SidenavSubmenuComponent implements OnInit {
 
   @Input()
+  theme: string;
+
+  @Input()
   isCollapsed: boolean;
 
-  @Input()
-  public items: Array<NavigationItem>;
-
-  @Input()
-  public title: string;
-
-  @Input()
-  public icon: string;
-
-  constructor() {
+  constructor(public db: DatabaseService) {
   }
 
   ngOnInit() {

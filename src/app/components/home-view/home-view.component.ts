@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-view',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeViewComponent implements OnInit {
 
-  constructor() { }
+  id: string;
+  title = 'Loading ...';
+  email = 'lordvoldermort@gmail.com';
+  modules: string[];
+
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.title = params.name;
+      console.log(params);
+    });
+  }
+
 
   ngOnInit() {
   }

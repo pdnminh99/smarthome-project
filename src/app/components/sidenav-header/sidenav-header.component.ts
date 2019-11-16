@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sidenav-header',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavHeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  isCollapsed: boolean;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

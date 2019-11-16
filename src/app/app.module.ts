@@ -19,14 +19,19 @@ import {NzModalModule} from 'ng-zorro-antd/modal';
 import {ModuleViewComponent} from './components/module-view/module-view.component';
 import {HomeViewComponent} from './components/home-view/home-view.component';
 import {CreateGroupButtonComponent} from './components/create-group-button/create-group-button.component';
-import { SidenavSubmenuComponent } from './components/sidenav-submenu/sidenav-submenu.component';
-import { SidenavHeaderComponent } from './components/sidenav-header/sidenav-header.component';
+import {SidenavSubmenuComponent} from './components/sidenav-submenu/sidenav-submenu.component';
+import {SidenavHeaderComponent} from './components/sidenav-header/sidenav-header.component';
+import {PortalScreenComponent} from './pages/portal-screen/portal-screen.component';
+import {LoginComponent} from './pages/login/login.component';
+import {SettingsService} from '../services/Settings/settings.service';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 registerLocaleData(en);
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent],
+  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -40,7 +45,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{provide: NZ_I18N, useValue: en_US}],
+  providers: [SettingsService, {provide: NZ_I18N, useValue: en_US}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
