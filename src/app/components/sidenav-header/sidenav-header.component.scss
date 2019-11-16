@@ -1,18 +1,31 @@
 .sidebar-logo img {
   display: inline-block;
+  //height: 32px;
+  //width: 32px;
+  vertical-align: middle;
+  horiz-align: center;
+}
+
+.image-fold {
   height: 32px;
   width: 32px;
-  vertical-align: middle;
+}
+
+.image-unfold {
+  height: 80%;
+  align-self: center;
 }
 
 .sidebar-logo {
+  text-align: center;
   position: relative;
-  height: 64px;
-  padding-left: 24px;
+  height: 100px;
+  padding: 10px 0;
+  //padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #001529;
   transition: all .3s;
+  background: transparent;
 }
 
 .sidebar-logo h1 {

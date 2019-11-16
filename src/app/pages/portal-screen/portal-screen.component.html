@@ -1,0 +1,42 @@
+<nz-layout class="app-layout">
+  <!-- App sidebar -->
+  <nz-sider
+    class="menu-sidebar"
+    [nzTheme]="settings.theme"
+    nzCollapsible
+    nzWidth="200px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+
+    <app-sidenav-header [isCollapsed]="isCollapsed"
+                        style="width: 100%"></app-sidenav-header>
+
+    <app-create-group-button *ngIf="!isCollapsed" style="width: 100%;"></app-create-group-button>
+
+    <app-sidenav-submenu [isCollapsed]="isCollapsed"
+                         [theme]="settings.theme"></app-sidenav-submenu>
+  </nz-sider>
+  <nz-layout [class.layout-dark]="settings.isDark">
+    <nz-header>
+      <div class="app-header" [className]="settings.isDark ? 'app-header-dark' : 'app-header-light'">
+    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <i
+        class="trigger"
+        nz-icon
+        [className]="settings.isDark ? 'icon-dark' : 'icon-light'"
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+      ></i>
+    </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div [className]="settings.isDark ? 'inner-content-dark' : 'inner-content-light'">
+        <!--        <app-home-view></app-home-view>-->
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
