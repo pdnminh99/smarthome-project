@@ -4,6 +4,7 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Module} from '../../../models/Module';
 import {Observable, Subscription} from 'rxjs';
 import {normalizeSlashes} from 'ts-node';
+import {DatabaseService} from '../../../services/Database/database.service';
 
 @Component({
   selector: 'app-home-view',
@@ -13,15 +14,14 @@ import {normalizeSlashes} from 'ts-node';
 export class HomeViewComponent implements OnInit {
 
   id: string;
-  title = 'Loading ...';
-  email = 'lordvoldermort@gmail.com';
+  title: string;
   modules: Array<Module>;
   databaseObservable: Observable<any[]>;
   isVisible = false;
   inputString: string;
   isLoading: boolean;
 
-  constructor(private db: AngularFireDatabase, private route: ActivatedRoute) {
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private database: DatabaseService) {
     this.modules = new Array<Module>();
     this.route.params.subscribe(params => {
       this.id = params.id;

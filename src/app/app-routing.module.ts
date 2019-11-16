@@ -7,7 +7,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/profile'},
   {path: 'profile', component: ProfileComponent},
-  {path: 'house/:id/:name', component: HomeViewComponent},
+  {path: 'house/:id/:name/:order', component: HomeViewComponent},
   {path: 'settings', component: SettingsComponent}
   // {path: '', pathMatch: 'full', redirectTo: '/welcome'},
   // { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }

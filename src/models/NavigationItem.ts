@@ -1,4 +1,7 @@
 export class NavigationItem {
+
+  public order: number;
+
   private ID: string;
 
   public get id(): string {
@@ -7,16 +10,18 @@ export class NavigationItem {
 
   public set id(value: string) {
     this.ID = value;
-    this.routeURL = `house/${this.id}/${this.title}`;
+    this.routeURL = `house/${this.id}/${this.title}/${this.order}`;
   }
 
   public title: string;
   public icon: string;
   public routeURL: string;
 
-  constructor(title: string, icon: string, id: string) {
+  constructor(title: string, icon: string, id: string, order: number) {
     this.title = title;
     this.icon = icon;
+    this.order = order;
     this.id = id;
+    // console.log(`${this.title} has ${this.order}`);
   }
 }
