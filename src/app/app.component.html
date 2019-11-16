@@ -8,21 +8,15 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
   >
-    <div class="sidebar-logo">
-      <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo"/>
-      <h1>Smart Home</h1>
-    </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
-      <app-create-group-button *ngIf="!isCollapsed"
-                               style="width: 100%; margin: 10px; padding: 0 10px;"></app-create-group-button>
-      <app-sidenav-submenu [title]="'Personalize'" [icon]="'tool'"></app-sidenav-submenu>
-      <app-sidenav-submenu [title]="'Group'" [icon]="'book'"></app-sidenav-submenu>
-    </ul>
+
+    <app-sidenav-header></app-sidenav-header>
+
+    <app-create-group-button *ngIf="!isCollapsed"
+                             style="width: 100%; margin: 10px; padding: 0 10px;"></app-create-group-button>
+    <app-sidenav-submenu [title]="'Personalize'" [icon]="'tool'"
+                         [items]="personalizeNavigation" [isCollapsed]="isCollapsed"></app-sidenav-submenu>
+    <app-sidenav-submenu [title]="'Group'" [icon]="'book'" [items]="groupsNavigation"
+                         [isCollapsed]="isCollapsed"></app-sidenav-submenu>
   </nz-sider>
   <nz-layout>
     <!--    <nz-header>-->

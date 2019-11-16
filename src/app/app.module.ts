@@ -20,12 +20,13 @@ import {ModuleViewComponent} from './components/module-view/module-view.componen
 import {HomeViewComponent} from './components/home-view/home-view.component';
 import {CreateGroupButtonComponent} from './components/create-group-button/create-group-button.component';
 import { SidenavSubmenuComponent } from './components/sidenav-submenu/sidenav-submenu.component';
+import { SidenavHeaderComponent } from './components/sidenav-header/sidenav-header.component';
 
 registerLocaleData(en);
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent],
+  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

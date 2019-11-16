@@ -9,10 +9,16 @@ import {NavigationItem} from '../../../models/NavigationItem';
 export class SidenavSubmenuComponent implements OnInit {
 
   @Input()
-  title: string;
+  isCollapsed: boolean;
 
   @Input()
-  icon: string;
+  public items: Array<NavigationItem>;
+
+  @Input()
+  public title: string;
+
+  @Input()
+  public icon: string;
 
   constructor() {
   }

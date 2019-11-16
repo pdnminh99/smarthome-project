@@ -10,19 +10,18 @@ import {NavigationItem} from '../models/NavigationItem';
 export class AppComponent {
   isCollapsed = false;
 
-  // personalizeNavigation: Array<NavigationItem>;
-  // groupsNavigation: Array<NavigationItem>;
+  personalizeNavigation: Array<NavigationItem> = [
+    new NavigationItem('Profile', 'profile', ''),
+    new NavigationItem('Settings', 'setting', ''),
+  ];
+
+  groupsNavigation: Array<NavigationItem> = [
+    new NavigationItem('Villa 1', 'home', ''),
+    new NavigationItem('Villa 2', 'home', ''),
+    new NavigationItem('Villa 3', 'home', ''),
+  ];
 
   constructor() {
-    // this.personalizeNavigation = new Array<NavigationItem>();
-    // this.groupsNavigation = new Array<NavigationItem>();
-    // this.personalizeNavigation.push(new NavigationItem('Profile', 'profile', '/profile'));
-    // this.personalizeNavigation.push(new NavigationItem('Settings', 'setting', '/setting'));
-    // this.groupsNavigation.push(new NavigationItem('Villa 1', 'home', '/villa1'));
-    // this.groupsNavigation.push(new NavigationItem('Villa 2', 'home', '/villa2'));
-    // this.groupsNavigation.push(new NavigationItem('Villa 3', 'home', '/villa3'));
-    // console.log(this.groupsNavigation.length);
-    // console.log(this.personalizeNavigation.length);
   }
 
   // constructor(db: AngularFireDatabase) {
