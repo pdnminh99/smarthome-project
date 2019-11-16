@@ -14,7 +14,7 @@ export class DatabaseService {
     this.userSubscription.subscribe(snapshots => {
       const homes = snapshots[1].payload.val();
       // @ts-ignore
-      this.navigation = [...homes.map(house => new NavigationItem(house.name, 'home', house.id))];
+      this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
     });
   }
 }

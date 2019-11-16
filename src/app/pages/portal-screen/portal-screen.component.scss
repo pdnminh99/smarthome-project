@@ -38,16 +38,43 @@ nz-header {
   position: relative;
   height: 64px;
   padding: 0;
-  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+
+.app-header-dark {
+  background-color: #23395d;
+}
+
+.app-header-light {
+  background: #fff;
 }
 
 nz-content {
   margin: 24px;
 }
 
-.inner-content {
+.inner-content-light {
   padding: 24px;
   background: #fff;
   height: 100%;
+  color: #000;
+}
+
+.inner-content-dark {
+  padding: 24px;
+  background: #152238;
+  height: 100%;
+  color: #fff;
+}
+
+.layout-dark {
+  background-color: #23395d;
+}
+
+.icon-light {
+  color: #000;
+}
+
+.icon-dark {
+  color: #fff;
 }

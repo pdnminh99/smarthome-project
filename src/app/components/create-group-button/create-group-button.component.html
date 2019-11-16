@@ -4,7 +4,30 @@
     nz-button
     nzType="primary"
     style="width: 80%; text-align: center;"
+    (click)="isVisible = true"
   >
     <i nz-icon nzType="plus-circle" nzTheme="fill"></i> Create group
   </button>
 </div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter">
+  <span style="width: 45%; display: inline-block;">
+    <h4>Name</h4>
+    <input nz-input placeholder="Type here ..." [(ngModel)]="groupName"/>
+  </span>
+  <nz-divider nzType="vertical"></nz-divider>
+  <span style="width: 50%; display: inline-block;">
+    <h4>Group icon</h4>
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select an icon ..." [(ngModel)]="inputICO">
+      <nz-option *ngFor="let icon of icons" nzCustomContent [nzLabel]="icon" [nzValue]="icon"
+      ><i nz-icon [nzType]="icon"></i> {{ icon }}
+      </nz-option
+      >
+    </nz-select>
+  </span>
+</nz-modal>
+
+<ng-template #modalFooter>
+  <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+  <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isLoading">Create</button>
+</ng-template>

@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationItem} from '../../../models/NavigationItem';
 import {SettingsService} from '../../../services/Settings/settings.service';
 import {DatabaseService} from '../../../services/Database/database.service';
-import {NavigationGroup} from '../../../models/NavigationGroup';
 
 @Component({
   selector: 'app-portal-screen',
