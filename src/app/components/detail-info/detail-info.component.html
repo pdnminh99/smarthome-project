@@ -1,0 +1,46 @@
+<div>
+    <mat-form-field class="example-full-width" style="width: 300px;">
+        <input matInput placeholder="" [(ngModel)]="room.name" id="dialogName">
+    </mat-form-field>
+    <button mat-button id="controler" (click)="saveNameChange()">Save change</button>
+    <button mat-mini-fab [mat-dialog-close]="true" id="closeDial">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+
+<br>
+<div id="charts">
+    <!-- <app-charts [room]="room"></app-charts> -->
+    <div *ngFor="let c of charts">
+        <div id={{c.id}}>
+            <canvas baseChart width="400" height="200" [datasets]="c.lineChartData" [labels]="c.lineChartLabels"
+                [options]="c.lineChartOptions" [chartType]="c.lineChartType" [colors]="c.lineChartColors"></canvas>
+        </div>
+    </div>
+</div>
+<div id="temp_hum_number">
+    <div>
+        <svg height="200" width="200">
+            <circle cx="104" cy="115" r="58" stroke="red" stroke-width="3" fill="transparent" />
+            <text x="65%" y="50%" stroke="#51c5cf" stroke-width="2px" font-size="35" dx="-20%" dy="14%">{{temp}}</text>
+            <circle cx="137" cy="118" r="4" stroke="#51c5cf" stroke-width="3" fill="transparent" />
+            <text x="90%" y="50%" stroke="#51c5cf" stroke-width="2px" font-size="20" dx="-18%" dy="14%">
+                C
+            </text>
+        </svg>
+    </div>
+
+    <div>
+        <svg height="200" width="200">
+            <circle cx="104" cy="115" r="58" stroke="red" stroke-width="3" fill="transparent" />
+            <text x="65%" y="50%" stroke="#51c5cf" stroke-width="2px" font-size="35" dx="-20%" dy="14%">{{humid}}</text>
+            <text x="83%" y="50%" stroke="#51c5cf" stroke-width="2px" font-size="30" dx="-18%" dy="14%">
+                %
+            </text>
+        </svg>
+    </div>
+</div>
+<div id="button">
+    <app-dialog-monitor-button [isLight]="room.isLight">
+    </app-dialog-monitor-button>
+</div>
