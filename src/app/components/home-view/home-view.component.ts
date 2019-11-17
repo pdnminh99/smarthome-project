@@ -37,7 +37,6 @@ export class HomeViewComponent implements OnInit {
       this.id = params.id;
       this.title = params.name;
       this.order = params.order;
-      console.log(`Current params ${this.id}; ${this.title}; ${this.order}`);
       if (this.id !== 'undefined') {
         // @ts-ignore
         this.databaseObservable = this.db
@@ -66,31 +65,14 @@ export class HomeViewComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     let URL = `https://us-central1-fb-demo-a57e3.cloudfunctions.net/connectModule?UUID=ggID&MAC=${this.inputString}&order=${this.order}`;
     if (this.id !== 'undefined') {
-      console.log(typeof this.id !== 'undefined');
       URL += `&id=${this.id}`;
     }
-    console.log(URL);
     // tslint:disable-next-line: deprecation
     this.http.get(URL).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.id = response['error']['id'];
-      console.log(`After connect this.id = ${this.id}`);
+      // console.log(`After connect this.id = ${this.id}`);
       this.router.navigateByUrl(`/house/${this.id}/${this.title}/${this.order}`).catch(error => console.log(error));
-      // @ts-ignore
-      // this.databaseObservable = this.db
-      //   .list(`homes/${this.id}`)
-      //   .snapshotChanges()
-      //   .subscribe(
-      //     snapshot =>
-      //       // @ts-ignore
-      //       (this.modules = [
-      //         ...snapshot.map(payload => {
-      //           // console.log(payload.payload.val());
-      //           // @ts-ignore
-      //           return new Module(payload.payload.val(), this.db);
-      //         })
-      //       ])
-      //   );
       this.isLoading = false;
       this.inputString = '';
       this.isVisible = false;

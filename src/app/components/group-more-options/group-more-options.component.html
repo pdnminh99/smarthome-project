@@ -4,10 +4,81 @@
 <nz-dropdown-menu #groupAction="nzDropdownMenu">
   <ul nz-menu>
     <li nz-menu-item>
-      <a><i nz-icon nzType="delete" nzTheme="outline"></i> Delete permanently</a>
+      <a (click)="isDeleteModalVisible = true"><i nz-icon nzType="delete" nzTheme="outline"></i> Delete permanently</a>
     </li>
     <li nz-menu-item>
-      <a><i nz-icon nzType="edit" nzTheme="outline"></i> Edit</a>
+      <a (click)="isEditModalVisible = true"><i nz-icon nzType="edit" nzTheme="outline"></i> Edit</a>
     </li>
   </ul>
 </nz-dropdown-menu>
+<!-- Delete modal -->
+<nz-modal
+  [(nzVisible)]="isDeleteModalVisible"
+  nzTitle="Confirm delete"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleDeleteModalCancel()"
+>
+  <div style="text-align: center" *ngIf="isSuccess">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+  </div>
+  <div *ngIf="!isSuccess">
+    <h4>Enter the group name to confirm your delete request: <strong>{{ name }}</strong></h4>
+    <input nz-input placeholder="Type here ..." [(ngModel)]="inputString" style="margin-bottom: 10px;"/>
+    <nz-alert nzType="error" *ngIf="errorMessage.length > 0" [nzMessage]="errorMessage" nzCloseable
+              (nzOnClose)="errorMessage = ''"></nz-alert>
+  </div>
+</nz-modal>
+
+<ng-template #modalFooter>
+  <button nz-button nzType="default" (click)="handleDeleteModalCancel()">Cancel</button>
+  <button
+    nz-button
+    nzType="danger"
+    (click)="handleDeleteModalOk()"
+    [nzLoading]="isLoading"
+  >
+    Confirm
+  </button>
+</ng-template>
+
+<!-- Edit modal -->
+<nz-modal
+  [(nzVisible)]="isEditModalVisible"
+  nzTitle="Change information"
+  [nzFooter]="editModalFooter"
+  (nzOnCancel)="handleEditModalCancel()"
+>
+  <div style="text-align: center" *ngIf="isSuccess">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+  </div>
+  <div *ngIf="!isSuccess">
+    <span style="width: 45%; display: inline-block;">
+    <h4>Name</h4>
+    <input nz-input placeholder="Type here ..." [(ngModel)]="newName"/>
+  </span>
+    <nz-divider nzType="vertical"></nz-divider>
+    <span style="width: 50%; display: inline-block;">
+    <h4>Group icon</h4>
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select an icon ..." [(ngModel)]="newIcon">
+      <nz-option *ngFor="let icon of iconsLibrary" nzCustomContent [nzLabel]="icon" [nzValue]="newIcon"
+      ><i nz-icon [nzType]="icon"></i> {{ icon }}
+      </nz-option
+      >
+    </nz-select>
+  </span>
+    <nz-alert nzType="error" *ngIf="errorMessage.length > 0" [nzMessage]="errorMessage" nzCloseable
+              (nzOnClose)="errorMessage = ''"></nz-alert>
+  </div>
+</nz-modal>
+
+<ng-template #editModalFooter>
+  <button nz-button nzType="default" (click)="handleEditModalCancel()">Cancel</button>
+  <button
+    nz-button
+    nzType="primary"
+    (click)="handleEditModalOk()"
+    [nzLoading]="isLoading"
+  >
+    Submit change
+  </button>
+</ng-template>
