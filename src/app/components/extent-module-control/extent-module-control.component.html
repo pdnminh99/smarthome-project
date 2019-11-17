@@ -1,0 +1,69 @@
+<button nz-button nz-dropdown nzShape="circle" nzType="link" nzSize="large"
+        [nzDropdownMenu]="groupAction">More options <i nz-icon nzType="down"></i>
+</button>
+<nz-dropdown-menu #groupAction="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <a (click)="isDeleteModalVisible = true"><i nz-icon nzType="delete" nzTheme="outline"></i> Delete</a>
+    </li>
+    <li nz-menu-item>
+      <a (click)="isEditModalVisible = true"><i nz-icon nzType="edit" nzTheme="outline"></i> Change name</a>
+    </li>
+  </ul>
+</nz-dropdown-menu>
+
+<nz-modal
+  [(nzVisible)]="isDeleteModalVisible"
+  nzTitle="Confirm delete"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleDeleteModalCancel()"
+>
+  <div style="text-align: center" *ngIf="isSuccess">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+  </div>
+  <div *ngIf="!isSuccess">
+    <h4>Are you sure to remove module {{ name }}</h4>
+  </div>
+</nz-modal>
+
+<ng-template #modalFooter>
+  <button nz-button nzType="default" (click)="handleDeleteModalCancel()">Cancel</button>
+  <button
+    nz-button
+    nzType="danger"
+    (click)="handleDeleteModalOk()"
+    [nzLoading]="isLoading"
+  >
+    Remove
+  </button>
+</ng-template>
+
+<!-- Edit modal -->
+<nz-modal
+  [(nzVisible)]="isEditModalVisible"
+  nzTitle="Change information"
+  [nzFooter]="editModalFooter"
+  (nzOnCancel)="handleEditModalCancel()"
+>
+  <div style="text-align: center" *ngIf="isSuccess">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+  </div>
+  <div *ngIf="!isSuccess">
+    <span style="width: 45%; display: inline-block;">
+    <h4>Name</h4>
+    <input nz-input placeholder="Type here ..." [(ngModel)]="newName"/>
+  </span>
+  </div>
+</nz-modal>
+
+<ng-template #editModalFooter>
+  <button nz-button nzType="default" (click)="handleEditModalCancel()">Cancel</button>
+  <button
+    nz-button
+    nzType="primary"
+    (click)="handleEditModalOk()"
+    [nzLoading]="isLoading"
+  >
+    Submit change
+  </button>
+</ng-template>

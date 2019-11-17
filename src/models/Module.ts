@@ -22,6 +22,36 @@ export class Module {
 
   status = Status.SAFE;
 
+  public get statusToIcon(): string {
+    switch (this.status) {
+      case Status.DISCONNECT:
+        return 'disconnect';
+      case Status.FIRE:
+        return 'fire';
+      case Status.SAFE:
+        return 'safety';
+      case Status.SMOKE:
+        return 'alert';
+      default:
+        return 'poweroff';
+    }
+  }
+
+  public get statusToString(): string {
+    switch (this.status) {
+      case Status.DISCONNECT:
+        return 'Not connected';
+      case Status.FIRE:
+        return 'Fire alerted';
+      case Status.SAFE:
+        return 'Safe';
+      case Status.SMOKE:
+        return 'Smoke alerted';
+      default:
+        return 'Off';
+    }
+  }
+
   private _NAME: string;
 
   get name(): string {

@@ -31,6 +31,7 @@ import { InfoButtonComponent } from "./components/info-button/info-button.compon
 import { MenuBtnComponent } from "./components/menu-btn/menu-btn.component";
 import { HomeViewInfoComponent } from "./components/home-view-info/home-view-info.component";
 import { GroupMoreOptionsComponent } from "./components/group-more-options/group-more-options.component";
+import { ExtentModuleControlComponent } from './components/extent-module-control/extent-module-control.component';
 
 registerLocaleData(en);
 
@@ -52,7 +53,8 @@ registerLocaleData(en);
     HomeViewInfoComponent,
     GroupMoreOptionsComponent,
     InfoDisplayComponent,
-    InfoButtonComponent
+    InfoButtonComponent,
+    ExtentModuleControlComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
