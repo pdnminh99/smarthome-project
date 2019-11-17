@@ -1,0 +1,13 @@
+<button nz-button nz-dropdown nz-button nzShape="circle" nzType="link" nzSize="large"
+        [nzDropdownMenu]="groupAction">More options <i nz-icon nzType="down"></i>
+</button>
+<nz-dropdown-menu #groupAction="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <a><i nz-icon nzType="delete" nzTheme="outline"></i> Delete permanently</a>
+    </li>
+    <li nz-menu-item>
+      <a><i nz-icon nzType="edit" nzTheme="outline"></i> Edit</a>
+    </li>
+  </ul>
+</nz-dropdown-menu>

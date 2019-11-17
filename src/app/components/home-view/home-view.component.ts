@@ -16,6 +16,7 @@ export class HomeViewComponent implements OnInit {
 
   id: string;
   title: string;
+  order: number;
   modules: Array<Module>;
   databaseObservable: Observable<any[]>;
   isVisible = false;
@@ -27,6 +28,8 @@ export class HomeViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params.id;
       this.title = params.name;
+      this.order = params.order;
+      console.log(`Current params ${this.id}; ${this.title}; ${this.order}`);
       // @ts-ignore
       this.databaseObservable = this.db.list(`homes/${this.id}`).snapshotChanges().subscribe(snapshot =>
         // @ts-ignore

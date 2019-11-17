@@ -3,14 +3,10 @@
   <app-menu-btn nz-col nzSpan="1" style="text-align: left; width: 30%;"></app-menu-btn>
   <app-home-view-info nz-col nzSpan="9" style="text-align: center;" [title]="title" [email]="database.email"
                       [isVisible]="isVisible" (isConnectButtonClicked)="isVisible = true"></app-home-view-info>
-  <div nz-col nzSpan="1" style="text-align: right; width: 30%;">
-    <button nz-button nzShape="circle" nzType="link" nzSize="large">
-      <i nz-icon nzType="more"></i>
-    </button>
-  </div>
+  <app-group-more-options nz-col nzSpan="1" style="text-align: right; width: 30%;"></app-group-more-options>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
   <h4>Name {{ inputString }}</h4>
   <input nz-input placeholder="Type here ..." [(ngModel)]="inputString"/>
 </nz-modal>
