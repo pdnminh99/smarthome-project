@@ -7,9 +7,9 @@ import {NavigationItem} from '../../models/NavigationItem';
 })
 export class DatabaseService {
 
-  private userSubscription = this.db.list('users1/ggID').snapshotChanges();
-  public navigation = new Array<NavigationItem>();
   public UUID = 'ggID';
+  private userSubscription = this.db.list(`users1/${this.UUID}`).snapshotChanges();
+  public navigation = new Array<NavigationItem>();
   public email: string;
   public name: string;
   public photoURL: string;
