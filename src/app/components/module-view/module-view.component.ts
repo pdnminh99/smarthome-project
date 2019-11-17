@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Module} from '../../../models/Module';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Module } from '../../../models/Module';
 @Component({
   selector: 'app-module-view',
   templateUrl: './module-view.component.html',
