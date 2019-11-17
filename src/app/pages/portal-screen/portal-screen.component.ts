@@ -9,7 +9,7 @@ import {DatabaseService} from '../../../services/Database/database.service';
 })
 export class PortalScreenComponent implements OnInit {
 
-  isCollapsed = false;
+  // isCollapsed = false;
 
   constructor(public settings: SettingsService, public database: DatabaseService) {
   }

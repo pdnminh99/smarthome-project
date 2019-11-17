@@ -1,11 +1,25 @@
 <div style="width: 100%; text-align: center;">
-  <div style="margin-bottom: 20px; width: 100%;">
-    <h1 nz-title style="margin-bottom: 5px;">{{ title }}</h1>
-    <p>{{ database.email }}</p>
-
-    <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="isVisible = true">
-      <i nz-icon nzType="api" nzTheme="fill"></i> Connect module
-    </button>
+  <!--  <div style="margin-bottom: 20px; width: 100%;">-->
+  <div nz-row nzType="flex" nzJustify="space-around" nzAlign="top" style="margin-bottom: 20px;">
+    <div nz-col nzSpan="1" style="text-align: left; width: 30%;">
+      <button nz-button nzShape="circle" nzType="link" nzSize="large"
+              (click)="settings.isCollapsed = !settings.isCollapsed">
+        <i *ngIf="settings.isCollapsed" nz-icon nzType="menu-fold"></i>
+        <i *ngIf="!settings.isCollapsed" nz-icon nzType="menu-unfold"></i>
+      </button>
+    </div>
+    <div nz-col nzSpan="9">
+      <h1 nz-title style="margin-bottom: 5px;">{{ title }}</h1>
+      <p>{{ database.email }}</p>
+      <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="isVisible = true">
+        <i nz-icon nzType="api" nzTheme="fill"></i> Connect module
+      </button>
+    </div>
+    <div nz-col nzSpan="1" style="text-align: right; width: 30%;">
+      <button nz-button nzShape="circle" nzType="link" nzSize="large">
+        <i nz-icon nzType="more"></i>
+      </button>
+    </div>
   </div>
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter">
