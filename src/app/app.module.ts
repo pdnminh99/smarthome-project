@@ -26,12 +26,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { SettingsService } from '../services/Settings/settings.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { InfoDisplayComponent } from './components/info-display/info-display.component';
+import { InfoButtonComponent } from './components/info-button/info-button.component';
 
 registerLocaleData(en);
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent],
+  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent, InfoDisplayComponent, InfoButtonComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
