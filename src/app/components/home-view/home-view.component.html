@@ -1,19 +1,51 @@
-<div nz-row nzType="flex" nzJustify="space-around" nzAlign="top" style="margin-bottom: 20px;">
-
-  <app-menu-btn nz-col nzSpan="1" style="text-align: left; width: 30%;"></app-menu-btn>
-  <app-home-view-info nz-col nzSpan="9" style="text-align: center;" [title]="title" [email]="database.email"
-                      [isVisible]="isVisible" (isConnectButtonClicked)="isVisible = true"></app-home-view-info>
-  <app-group-more-options nz-col nzSpan="1" style="text-align: right; width: 30%;"></app-group-more-options>
+<div
+  nz-row
+  nzType="flex"
+  nzJustify="space-around"
+  nzAlign="top"
+  style="margin-bottom: 20px;"
+>
+  <app-menu-btn
+    nz-col
+    nzSpan="1"
+    style="text-align: left; width: 30%;"
+  ></app-menu-btn>
+  <app-home-view-info
+    nz-col
+    nzSpan="9"
+    style="text-align: center;"
+    [title]="title"
+    [email]="database.email"
+    [isVisible]="isVisible"
+    (isConnectButtonClicked)="isVisible = true"
+  ></app-home-view-info>
+  <app-group-more-options
+    nz-col
+    nzSpan="1"
+    style="text-align: right; width: 30%;"
+  ></app-group-more-options>
 </div>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
-  <h4>Name {{ inputString }}</h4>
-  <input nz-input placeholder="Type here ..." [(ngModel)]="inputString"/>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Create group"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <h4>Enter MAC address</h4>
+  <input nz-input placeholder="Type here ..." [(ngModel)]="inputString" />
 </nz-modal>
 
 <ng-template #modalFooter>
   <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-  <button nz-button nzType="primary" (click)="handleOk()">Connect</button>
+  <button
+    nz-button
+    nzType="primary"
+    (click)="handleOk()"
+    [nzLoading]="isLoading"
+  >
+    Connect
+  </button>
 </ng-template>
 
 <app-module-view [modules]="modules"></app-module-view>

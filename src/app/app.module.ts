@@ -64,8 +64,8 @@ registerLocaleData(en);
     IconsProviderModule,
     NgZorroAntdModule,
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [SettingsService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

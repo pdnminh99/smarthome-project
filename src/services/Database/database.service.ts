@@ -9,6 +9,7 @@ export class DatabaseService {
 
   private userSubscription = this.db.list('users1/ggID').snapshotChanges();
   public navigation = new Array<NavigationItem>();
+  public UUID = 'ggID';
   public email: string;
   public name: string;
   public photoURL: string;
