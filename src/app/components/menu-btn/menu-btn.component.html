@@ -1,0 +1,5 @@
+<button nz-button nzShape="circle" nzType="link" nzSize="large"
+        (click)="settings.isCollapsed = !settings.isCollapsed">
+  <i *ngIf="settings.isCollapsed" nz-icon nzType="menu-fold"></i>
+  <i *ngIf="!settings.isCollapsed" nz-icon nzType="menu-unfold"></i>
+</button>

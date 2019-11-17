@@ -28,12 +28,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { InfoDisplayComponent } from './components/info-display/info-display.component';
 import { InfoButtonComponent } from './components/info-button/info-button.component';
+import { MenuBtnComponent } from './components/menu-btn/menu-btn.component';
+import { HomeViewInfoComponent } from './components/home-view-info/home-view-info.component';
 
 registerLocaleData(en);
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent, InfoDisplayComponent, InfoButtonComponent],
+  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent, InfoDisplayComponent, InfoButtonComponent, MenuBtnComponent, HomeViewInfoComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

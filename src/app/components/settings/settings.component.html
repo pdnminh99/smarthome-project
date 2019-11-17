@@ -1,13 +1,25 @@
-<div class="wrapper" style="width: 1000px; margin: 0 auto;">
-  <h1>Settings</h1>
+<div nz-row nzJustify="start">
+  <div nz-col nzSpan="1">
+    <app-menu-btn></app-menu-btn>
+    <!--    <button nz-button nzShape="circle" nzType="link" nzSize="large"-->
+    <!--            (click)="settings.isCollapsed = !settings.isCollapsed">-->
+    <!--      <i *ngIf="settings.isCollapsed" nz-icon nzType="menu-fold"></i>-->
+    <!--      <i *ngIf="!settings.isCollapsed" nz-icon nzType="menu-unfold"></i>-->
+    <!--    </button>-->
+  </div>
+  <div nz-col nzSpan="10">
+    <h1 nz-title style="margin: 0 20px;">Settings</h1>
+  </div>
+</div>
+<div nz-row>
   <nz-divider nzText="Appearance"></nz-divider>
-  <h4>Theme</h4>
+  <h5 nz-title>Theme</h5>
   <span>Light</span>
   <nz-switch [(ngModel)]="settings.isDark" style="margin: 0 10px"></nz-switch>
   <span>Dark</span>
   <nz-divider nzText="Preference"></nz-divider>
-  <h4>Temperature</h4>
+  <h5 nz-title>Temperature</h5>
   <span>Celcius</span>
-  <nz-switch style="margin: 0 10px"></nz-switch>
+  <nz-switch [(ngModel)]="settings.isFarenheit" style="margin: 0 10px"></nz-switch>
   <span>Farenheit</span>
 </div>

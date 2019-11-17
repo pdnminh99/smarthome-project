@@ -5,6 +5,10 @@ import {Injectable} from '@angular/core';
 })
 export class SettingsService {
 
+  public isFarenheit = false;
+
+  public isCollapsed = false;
+
   private isDarkTheme = false;
 
   public get theme(): string {
