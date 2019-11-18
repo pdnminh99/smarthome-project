@@ -7,7 +7,7 @@
       <a (click)="isDeleteModalVisible = true"><i nz-icon nzType="delete" nzTheme="outline"></i> Delete permanently</a>
     </li>
     <li nz-menu-item>
-      <a (click)="isEditModalVisible = true"><i nz-icon nzType="edit" nzTheme="outline"></i> Edit</a>
+      <a (click)="isEditModalVisible = true; newName = name; newIcon = icon;"><i nz-icon nzType="edit" nzTheme="outline"></i> Edit</a>
     </li>
   </ul>
 </nz-dropdown-menu>

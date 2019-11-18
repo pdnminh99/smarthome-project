@@ -3,6 +3,8 @@ import {Status} from './Enums';
 
 export class Module {
 
+  // alertThemeInterval: any;
+  theme: string;
   private _TEMP_HUMID: string;
 
   set temp_humid(value: string) {
@@ -72,20 +74,27 @@ export class Module {
 
   constructor(public _MAC: string, private db: AngularFireDatabase) {
     db.list(`modules/${this.MAC}`).snapshotChanges().subscribe(snapshots => {
-      if (this.status !== this.statusMap[snapshots[3].payload.val().toString()]) {
-        this.status = this.statusMap[snapshots[3].payload.val().toString()];
-      }
-      if (this._TEMP_HUMID !== snapshots[4].payload.val().toString()) {
-        const data = snapshots[5].payload.val().toString().split(' ');
-        this.temperature = parseFloat(data[0]);
-        this.humidity = parseFloat(data[1]);
-      }
-      if (this.status !== snapshots[2].payload.val()) {
-        this.isLight = snapshots[2].payload.val().toString() === `true`;
-      }
-      if (this.name !== snapshots[5].payload.val()) {
-        this._NAME = snapshots[4].payload.val().toString();
-      }
+      // @ts-ignore
+      this.status = this.statusMap[snapshots[2].payload.val()];
+      // @ts-ignore
+      // if (status !== Status.SMOKE && status !== Status.FIRE) {
+      //   if (this.alertThemeInterval !== undefined) {
+      //     this.alertThemeInterval.clearInterval();
+      //   }
+      //   this.theme = '';
+      // } else {
+      //   this.alertThemeInterval = setInterval(() => {
+      //     this.theme = this.theme === 'alert-card' ? '' : 'alert-card';
+      //     console.log(this.theme);
+      //   }, 1000);
+      // }
+      // @ts-ignore
+      const data = snapshots[4].payload.val().split(' ');
+      this.temperature = parseFloat(data[0]);
+      this.humidity = parseFloat(data[1]);
+      this.isLight = snapshots[2].payload.val() === `true`;
+      // @ts-ignore
+      this._NAME = snapshots[3].payload.val();
     });
   }
 

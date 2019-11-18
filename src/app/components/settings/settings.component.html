@@ -8,17 +8,19 @@
     <!--    </button>-->
   </div>
   <div nz-col nzSpan="10">
-    <h1 nz-title style="margin: 0 20px;">Settings</h1>
+    <h1 nz-title style="margin: 0 20px;" [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }">Settings</h1>
   </div>
 </div>
 <div nz-row>
-  <nz-divider nzText="Appearance"></nz-divider>
-  <h5 nz-title>Theme</h5>
+  <nz-divider nzText="Appearance" nzOrientation="left"
+              [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }"></nz-divider>
+  <h5 nz-title [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }">Theme</h5>
   <span>Light</span>
   <nz-switch [(ngModel)]="settings.isDark" style="margin: 0 10px"></nz-switch>
   <span>Dark</span>
-  <nz-divider nzText="Preference"></nz-divider>
-  <h5 nz-title>Temperature</h5>
+  <nz-divider nzText="Preference" nzOrientation="left"
+              [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }"></nz-divider>
+  <h5 nz-title [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }">Temperature</h5>
   <span>Celcius</span>
   <nz-switch [(ngModel)]="settings.isFarenheit" style="margin: 0 10px"></nz-switch>
   <span>Farenheit</span>

@@ -33,7 +33,6 @@ export class ExtentModuleControlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newName = name;
   }
 
   handleDeleteModalCancel() {
@@ -52,7 +51,6 @@ export class ExtentModuleControlComponent implements OnInit {
       setTimeout(() => {
         this.isDeleteModalVisible = false;
         this.isLoading = false;
-        // this.router.navigateByUrl(`/house/${this.groupID}/${this.name}`).catch(error => console.log(error));
         this.isSuccess = false;
       }, 2000);
     });

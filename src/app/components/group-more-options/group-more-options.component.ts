@@ -57,8 +57,8 @@ export class GroupMoreOptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newName = this.name;
-    this.newIcon = this.icon;
+    // this.newName = this.name;
+    // this.newIcon = this.icon;
   }
 
   handleDeleteModalCancel() {

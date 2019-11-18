@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SettingsService} from '../../../services/Settings/settings.service';
 
 @Component({
   selector: 'app-home-view-info',
@@ -19,7 +20,7 @@ export class HomeViewInfoComponent implements OnInit {
   @Input()
   email: string;
 
-  constructor() {
+  constructor(private settings: SettingsService) {
   }
 
   ngOnInit() {

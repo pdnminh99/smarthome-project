@@ -11,12 +11,16 @@
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Create group" [nzFooter]="modalFooter">
-  <span style="width: 45%; display: inline-block;">
+  <div style="text-align: center" *ngIf="isSuccess">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+  </div>
+  <div *ngIf="!isSuccess">
+    <span style="width: 45%; display: inline-block;">
     <h4>Name</h4>
     <input nz-input placeholder="Type here ..." [(ngModel)]="groupName"/>
   </span>
-  <nz-divider nzType="vertical"></nz-divider>
-  <span style="width: 50%; display: inline-block;">
+    <nz-divider nzType="vertical"></nz-divider>
+    <span style="width: 50%; display: inline-block;">
     <h4>Group icon</h4>
     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select an icon ..." [(ngModel)]="inputICO">
       <nz-option *ngFor="let icon of icons" nzCustomContent [nzLabel]="icon" [nzValue]="icon"
@@ -25,6 +29,7 @@
       >
     </nz-select>
   </span>
+  </div>
 </nz-modal>
 
 <ng-template #modalFooter>

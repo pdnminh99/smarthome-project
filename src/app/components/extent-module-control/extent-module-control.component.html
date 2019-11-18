@@ -7,7 +7,7 @@
       <a (click)="isDeleteModalVisible = true"><i nz-icon nzType="delete" nzTheme="outline"></i> Delete</a>
     </li>
     <li nz-menu-item>
-      <a (click)="isEditModalVisible = true"><i nz-icon nzType="edit" nzTheme="outline"></i> Change name</a>
+      <a (click)="isEditModalVisible = true; newName = name;"><i nz-icon nzType="edit" nzTheme="outline"></i> Change name</a>
     </li>
   </ul>
 </nz-dropdown-menu>
@@ -49,10 +49,12 @@
     <img src="../../../assets/checkanimation.gif" style="height: 150px;">
   </div>
   <div *ngIf="!isSuccess">
-    <span style="width: 45%; display: inline-block;">
+    <div style="margin-bottom: 10px;">
     <h4>Name</h4>
     <input nz-input placeholder="Type here ..." [(ngModel)]="newName"/>
-  </span>
+  </div>
+    <nz-alert *ngIf="errorMessage.length > 0" nzType="error" (nzOnClose)="errorMessage = ''" nzCloseable
+              [nzMessage]="errorMessage"></nz-alert>
   </div>
 </nz-modal>
 
