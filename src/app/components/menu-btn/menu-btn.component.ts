@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SettingsService} from '../../../services/Settings/settings.service';
+import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../../../services/Settings/settings.service';
 
 @Component({
   selector: 'app-menu-btn',
@@ -8,7 +8,7 @@ import {SettingsService} from '../../../services/Settings/settings.service';
 })
 export class MenuBtnComponent implements OnInit {
 
-  constructor(private settings: SettingsService) {
+  constructor(public settings: SettingsService) {
   }
 
   ngOnInit() {

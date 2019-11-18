@@ -1,22 +1,13 @@
 <nz-layout class="app-layout">
   <!-- App sidebar -->
-  <nz-sider
-    class="menu-sidebar"
-    [nzTheme]="settings.theme"
-    nzCollapsible
-    nzWidth="200px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="settings.isCollapsed"
-    [nzTrigger]="null"
-  >
+  <nz-sider class="menu-sidebar" [nzTheme]="settings.theme" nzCollapsible nzWidth="200px" nzBreakpoint="md"
+    [(nzCollapsed)]="settings.isCollapsed" [nzTrigger]="null">
 
-    <app-sidenav-header [isCollapsed]="settings.isCollapsed"
-                        style="width: 100%"></app-sidenav-header>
+    <app-sidenav-header [isCollapsed]="settings.isCollapsed" style="width: 100%"></app-sidenav-header>
 
     <app-create-group-button *ngIf="!settings.isCollapsed" style="width: 100%;"></app-create-group-button>
 
-    <app-sidenav-submenu [isCollapsed]="settings.isCollapsed"
-                         [theme]="settings.theme"></app-sidenav-submenu>
+    <app-sidenav-submenu [isCollapsed]="settings.isCollapsed" [theme]="settings.theme"></app-sidenav-submenu>
   </nz-sider>
   <nz-layout [class.layout-dark]="settings.isDark">
     <!--    <nz-header>-->
@@ -38,4 +29,3 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
-

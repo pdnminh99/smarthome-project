@@ -1,35 +1,64 @@
-import {Injectable} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {NavigationItem} from '../../models/NavigationItem';
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase, snapshotChanges, AngularFireAction, DatabaseSnapshot } from '@angular/fire/database';
+import { NavigationItem } from '../../models/NavigationItem';
+import { Router } from '@angular/router';
+import { async } from 'q';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-
-  private userSubscription = this.db.list('users1/ggID').snapshotChanges();
+  public UUID: string;
+  private userSubscription: any;
   public navigation = new Array<NavigationItem>();
   public email: string;
   public name: string;
   public photoURL: string;
 
-  constructor(private db: AngularFireDatabase) {
-    this.userSubscription.subscribe(snapshots => {
-      // @ts-ignore
-      this.email = snapshots[0].payload.val();
-      // @ts-ignore
-      this.name = snapshots[2].payload.val();
-      // @ts-ignore
-      this.photoURL = snapshots[3].payload.val();
-      const homes = snapshots[1].payload.val();
-      this.navigation = [];
-      // @ts-ignore
-      for (let iterator in homes) {
-        // console.log(iterator);
-        this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
+  public checkIfExisted(user: { uid: string, email: string, name: string, photoURL: string }) {
+    this.db.list(`users1/${user.uid}`).query.once('value').then(value => {
+      if (value.val() == null) {
+        this.db.list('users1').set(user.uid, { "email": user.email, "homes": { "0": "0" }, "name": user.name, "photoURL": user.photoURL });
       }
-      // @ts-ignore
-      // this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
     });
+  }
+
+  public getUserData(user: { uid: string, email: string, name: string, photoURL: string }) {
+    this.UUID = user.uid;
+    this.email = user.email;
+    this.name = user.name;
+    this.photoURL = user.photoURL;
+    this.userSubscription = this.db.list(`users1/${this.UUID}`).snapshotChanges();
+    this.db.list(`users1/${this.UUID}`).query.once('value').then(value => {
+      if (value.val() === null) {
+        return this.db.list('users1').set(user.uid, { "email": user.email, "name": user.name, "photoURL": user.photoURL });
+      }
+      return;
+    }).then(_ => {
+      this.userSubscription.subscribe((snapshots: { payload: { val: () => void; }; }[]) => {
+        // // @ts-ignore
+        // this.email = snapshots[0].payload.val();
+        // // @ts-ignore
+        // this.name = snapshots[2].payload.val();
+        // // @ts-ignore
+        // this.photoURL = snapshots[3].payload.val();
+        console.log(this.email);
+        const homes = snapshots[1].payload.val();
+        this.navigation = [];
+        // @ts-ignore
+        for (let iterator in homes) {
+          // console.log(iterator);
+          this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
+        }
+        this.router.navigate(["portal"]);
+        // @ts-ignore
+        // this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
+      });
+    })
+  }
+
+  constructor(private db: AngularFireDatabase, private router: Router) {
+    // this.checkIfExisted();
+    // this.getUserData();
   }
 }

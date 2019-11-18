@@ -30,6 +30,7 @@ import { InfoDisplayComponent } from './components/info-display/info-display.com
 import { InfoButtonComponent } from './components/info-button/info-button.component';
 import { MenuBtnComponent } from './components/menu-btn/menu-btn.component';
 import { HomeViewInfoComponent } from './components/home-view-info/home-view-info.component';
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
 registerLocaleData(en);
 
@@ -47,7 +48,8 @@ registerLocaleData(en);
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireAuthModule,
   ],
   providers: [SettingsService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

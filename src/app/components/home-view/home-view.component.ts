@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AngularFireDatabase, SnapshotAction} from '@angular/fire/database';
-import {ActivatedRoute, Route, Router} from '@angular/router';
-import {Module} from '../../../models/Module';
-import {Observable, Subscription} from 'rxjs';
-import {normalizeSlashes} from 'ts-node';
-import {DatabaseService} from '../../../services/Database/database.service';
-import {SettingsService} from '../../../services/Settings/settings.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Module } from '../../../models/Module';
+import { Observable, Subscription } from 'rxjs';
+import { normalizeSlashes } from 'ts-node';
+import { DatabaseService } from '../../../services/Database/database.service';
+import { SettingsService } from '../../../services/Settings/settings.service';
 
 @Component({
   selector: 'app-home-view',
@@ -22,7 +22,7 @@ export class HomeViewComponent implements OnInit {
   inputString: string;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private database: DatabaseService, private settings: SettingsService) {
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, public database: DatabaseService, private settings: SettingsService) {
     this.modules = new Array<Module>();
     this.route.params.subscribe(params => {
       this.id = params.id;

@@ -1,27 +1,20 @@
-<ul
-  nz-menu
-  [nzTheme]="theme"
-  nzMode="inline"
-  [nzInlineCollapsed]="isCollapsed"
->
+<ul nz-menu [nzTheme]="theme" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
 
-  <li nz-submenu nzOpen nzTitle="Personalize"
-      nzIcon="edit">
+  <li nz-submenu nzOpen nzTitle="Personalize" nzIcon="edit">
 
     <ul>
       <li nz-menu-item nzMatchRouter>
-        <a routerLink="/profile"><i nz-icon nzType="profile" nzTheme="fill"></i> Profile
+        <a routerLink="profile"><i nz-icon nzType="profile" nzTheme="fill"></i> Profile
         </a>
       </li>
       <li nz-menu-item nzMatchRouter>
-        <a routerLink="/settings"><i nz-icon nzType="setting" nzTheme="fill"></i> Settings
+        <a routerLink="settings"><i nz-icon nzType="setting" nzTheme="fill"></i> Settings
         </a>
       </li>
     </ul>
   </li>
 
-  <li nz-submenu nzOpen nzTitle="Groups"
-      nzIcon="edit">
+  <li nz-submenu nzOpen nzTitle="Groups" nzIcon="edit">
 
     <ul>
       <li nz-menu-item nzMatchRouter *ngFor="let item of this.db.navigation">

@@ -1,1 +1,14 @@
-<p>login works!</p>
+<div id="body">
+    <nz-card id="login-card">
+        <p style="font-size:xx-large; font-weight: bold; margin-bottom: 0;">Sign-in</p>
+        <img id="app-logo" src="../../../assets/homeapp-ico.png">
+        <p style="font-size: 2.5vh; font-weight: lighter;">Wellcome to ng-SmartHome</p>
+        <p style="font-size: 2.5vh; font-weight: lighter;">A smarter way to control your house</p>
+        <button (click)="auth.login()" nz-button [nzType]='"danger"' [nzSize]='"large"'
+            style="font-size: large; margin-top: 2vh;">
+            <img src="../../../assets/search.png" style="width: 2.5vh; height: 2.5vh; margin-right: 0.5vh;"> Sign in
+            with
+            Google
+        </button>
+    </nz-card>
+</div>
