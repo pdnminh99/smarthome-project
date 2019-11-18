@@ -4,6 +4,7 @@ export enum Theme {
 }
 
 export enum Status {
+  OFF,
   SAFE,
   DISCONNECT,
   SMOKE,

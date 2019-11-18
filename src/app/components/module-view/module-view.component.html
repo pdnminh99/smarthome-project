@@ -1,5 +1,9 @@
 <nz-collapse [nzBordered]="false">
-  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name">
+  <!--  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name"-->
+  <!--                     style="border: transparent; border-radius: 3px;">-->
+  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name + '\t[' + module.statusToString + ']'"
+                     style="border: transparent; border-radius: 3px; font-size: 20px;"
+                     [ngStyle]="{ background: module.isAlert ? '#FFCCCB' : 'transparent' }">
     <nz-row [nzType]='"flex"' [nzJustify]='"center"'>
       <!-- DISPLAY CHART -->
       <nz-col [nzSpan]="6">
@@ -19,7 +23,7 @@
       </nz-col>
       <!--  DISPLAY STATUS AND BUTTON  -->
       <nz-col [nzSpan]="5">
-        <nz-card nzBordered style="text-align: center; width: 300px;">
+        <nz-card nzBordered style="text-align: center; width: 300px; border-radius: 4px;">
           <!-- DISPLAY STATUS -->
           <h2 nz-title style="height: 100px;"><i nz-icon
                                                  [nzType]="module.statusToIcon"></i>  {{ module.statusToString }}

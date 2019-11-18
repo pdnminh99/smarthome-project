@@ -3,8 +3,8 @@ import {Status} from './Enums';
 
 export class Module {
 
-  // alertThemeInterval: any;
-  theme: string;
+  alertThemeInterval;
+  isAlert = false;
   private _TEMP_HUMID: string;
 
   set temp_humid(value: string) {
@@ -22,7 +22,42 @@ export class Module {
   humidity = 0;
   isLight = false;
 
-  status = Status.SAFE;
+  private STATUS = Status.SAFE;
+
+  public get status(): Status {
+    return this.STATUS;
+  }
+
+  public set status(value: Status) {
+    switch (value) {
+      case Status.OFF:
+      case Status.SAFE:
+      case Status.DISCONNECT:
+        if (this.STATUS === Status.FIRE || this.STATUS === Status.SMOKE) {
+          clearInterval(this.alertThemeInterval);
+          // console.log(`Interval cleared`);
+          this.isAlert = false;
+        }
+        break;
+      case Status.SMOKE:
+      case Status.FIRE:
+        if (this.STATUS !== Status.SMOKE && this.STATUS !== Status.FIRE) {
+          this.alertThemeInterval = setInterval(() => {
+            this.isAlert = !this.isAlert;
+            // console.log(this.isAlert);
+          }, 1000);
+        }
+        break;
+      default:
+        if (this.STATUS === Status.FIRE || this.STATUS === Status.SMOKE) {
+          clearInterval(this.alertThemeInterval);
+          // console.log(`Interval cleared`);
+          this.isAlert = false;
+        }
+        break;
+    }
+    this.STATUS = value;
+  }
 
   public get statusToIcon(): string {
     switch (this.status) {
@@ -34,6 +69,8 @@ export class Module {
         return 'safety';
       case Status.SMOKE:
         return 'alert';
+      case Status.OFF:
+        return 'poweroff';
       default:
         return 'poweroff';
     }
@@ -49,6 +86,8 @@ export class Module {
         return 'Safe';
       case Status.SMOKE:
         return 'Smoke alerted';
+      case Status.OFF:
+        return 'Turned OFF';
       default:
         return 'Off';
     }
@@ -66,7 +105,7 @@ export class Module {
 
   private statusMap = {
     'x': Status.DISCONNECT,
-    '0': Status.SAFE,
+    '0': Status.OFF,
     '1': Status.SAFE,
     '2': Status.SMOKE,
     '3': Status.FIRE
@@ -76,18 +115,6 @@ export class Module {
     db.list(`modules/${this.MAC}`).snapshotChanges().subscribe(snapshots => {
       // @ts-ignore
       this.status = this.statusMap[snapshots[2].payload.val()];
-      // @ts-ignore
-      // if (status !== Status.SMOKE && status !== Status.FIRE) {
-      //   if (this.alertThemeInterval !== undefined) {
-      //     this.alertThemeInterval.clearInterval();
-      //   }
-      //   this.theme = '';
-      // } else {
-      //   this.alertThemeInterval = setInterval(() => {
-      //     this.theme = this.theme === 'alert-card' ? '' : 'alert-card';
-      //     console.log(this.theme);
-      //   }, 1000);
-      // }
       // @ts-ignore
       const data = snapshots[4].payload.val().split(' ');
       this.temperature = parseFloat(data[0]);
