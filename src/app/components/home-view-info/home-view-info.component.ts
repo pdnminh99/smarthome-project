@@ -20,7 +20,7 @@ export class HomeViewInfoComponent implements OnInit {
   @Input()
   email: string;
 
-  constructor(private settings: SettingsService) {
+  constructor(public settings: SettingsService) {
   }
 
   ngOnInit() {

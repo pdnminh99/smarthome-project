@@ -119,7 +119,9 @@ export class Module {
       const data = snapshots[4].payload.val().split(' ');
       this.temperature = parseFloat(data[0]);
       this.humidity = parseFloat(data[1]);
-      this.isLight = snapshots[2].payload.val() === `true`;
+      // @ts-ignore
+      this.isLight = snapshots[1].payload.val();
+      // console.log(`typeof ${snapshots[1].payload.val()} is ${typeof snapshots[1].payload.val()}\n${this.isLight}`);
       // @ts-ignore
       this._NAME = snapshots[3].payload.val();
     });

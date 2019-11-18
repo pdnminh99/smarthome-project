@@ -9,7 +9,7 @@ import {SettingsService} from '../../../services/Settings/settings.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private databaseService: DatabaseService, private settings: SettingsService) {
+  constructor(public databaseService: DatabaseService, public settings: SettingsService) {
   }
 
   ngOnInit() {

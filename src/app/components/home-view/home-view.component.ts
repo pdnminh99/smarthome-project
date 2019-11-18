@@ -21,7 +21,7 @@ export class HomeViewComponent implements OnInit {
   isVisible = false;
   errorMessage = '';
   isSuccess = false;
-  private privateInputString: string;
+  public privateInputString: string;
 
   public get inputString(): string {
     return this.privateInputString;
@@ -50,8 +50,8 @@ export class HomeViewComponent implements OnInit {
   constructor(
     private db: AngularFireDatabase,
     private route: ActivatedRoute,
-    private database: DatabaseService,
-    private settings: SettingsService,
+    public database: DatabaseService,
+    public settings: SettingsService,
     private http: HttpClient,
     private router: Router
   ) {

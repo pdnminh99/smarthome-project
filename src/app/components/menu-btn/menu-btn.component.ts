@@ -8,7 +8,7 @@ import {SettingsService} from '../../../services/Settings/settings.service';
 })
 export class MenuBtnComponent implements OnInit {
 
-  constructor(private settings: SettingsService) {
+  constructor(public settings: SettingsService) {
   }
 
   ngOnInit() {

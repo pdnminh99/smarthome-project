@@ -21,7 +21,7 @@ export class ModuleViewComponent implements OnInit {
   @Input()
   modules: Array<Module>;
 
-  constructor(private settings: SettingsService) {
+  constructor(public settings: SettingsService) {
   }
 
   ngOnInit() {
