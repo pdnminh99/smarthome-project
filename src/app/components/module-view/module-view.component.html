@@ -9,11 +9,12 @@
       <nz-col [nzSpan]="5">
         <!-- DISPLAY TEMPERATURE -->
         <nz-row style="margin-bottom:150px; margin-top:70px">
-          <app-info-display [title]='"Temperature"' [data]="module.temperature + '\u00B0C'"></app-info-display>
+          <app-info-display [title]='"Temperature"'
+                            [data]="settings.isFarenheit ? (module.temperature * 9 / 5 + 32) + '\u00B0F' : module.temperature + '\u00B0C'"></app-info-display>
         </nz-row>
         <!-- DISPLAY HUMIDITY -->
         <nz-row>
-          <app-info-display [title]='"Humidity"' [data]="module.humidity + '\u00B0F'"></app-info-display>
+          <app-info-display [title]='"Humidity"' [data]="module.humidity + '%'"></app-info-display>
         </nz-row>
       </nz-col>
       <!--  DISPLAY STATUS AND BUTTON  -->

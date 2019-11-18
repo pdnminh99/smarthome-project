@@ -3,6 +3,7 @@ import {Module} from '../../../models/Module';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {DatabaseService} from '../../../services/Database/database.service';
+import {SettingsService} from '../../../services/Settings/settings.service';
 
 @Component({
   selector: 'app-module-view',
@@ -20,7 +21,7 @@ export class ModuleViewComponent implements OnInit {
   @Input()
   modules: Array<Module>;
 
-  constructor() {
+  constructor(private settings: SettingsService) {
   }
 
   ngOnInit() {
