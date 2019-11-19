@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, snapshotChanges, AngularFireAction, DatabaseSnapshot } from '@angular/fire/database';
 import { NavigationItem } from '../../models/NavigationItem';
 import { Router } from '@angular/router';
-import { async } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { async } from 'q';
 export class DatabaseService {
   public UUID: string;
   private userSubscription: any;
-  public navigation = new Array<NavigationItem>();
+  public navigation: Array<NavigationItem>;
   public email: string;
   public name: string;
   public photoURL: string;
@@ -28,6 +27,7 @@ export class DatabaseService {
     this.email = user.email;
     this.name = user.name;
     this.photoURL = user.photoURL;
+    console.log(`User ${this.UUID}`);
     this.userSubscription = this.db.list(`users1/${this.UUID}`).snapshotChanges();
     this.db.list(`users1/${this.UUID}`).query.once('value').then(value => {
       if (value.val() === null) {
@@ -43,16 +43,21 @@ export class DatabaseService {
         // // @ts-ignore
         // this.photoURL = snapshots[3].payload.val();
         console.log(this.UUID);
-        const homes = snapshots[1].payload.val();
+        let homes = snapshots[1].payload.val();
         this.navigation = [];
-        if (homes != null) {
+        console.log(`Navigation length is ${this.navigation.length}`);
+        if (typeof homes !== 'string') {
           // @ts-ignore
           for (let iterator in homes) {
             // console.log(iterator);
             this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
           }
-          this.router.navigate(["portal/profile"]);
+          console.log(`Navigation length of ${homes} is ${this.navigation.length}`);
+        } else {
+          this.navigation = [];
+          console.log(`Navigation length is ${this.navigation.length}`);
         }
+        this.router.navigate(["portal/profile"]);
         // @ts-ignore
         // this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
       });
@@ -60,6 +65,7 @@ export class DatabaseService {
   }
 
   constructor(private db: AngularFireDatabase, private router: Router) {
+    this.navigation = new Array<NavigationItem>();
     // this.checkIfExisted();
     // this.getUserData();
   }

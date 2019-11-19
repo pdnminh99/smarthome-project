@@ -119,7 +119,7 @@ export class HomeViewComponent implements OnInit {
         throw Error('MAC address not available.');
       }
       // tslint:disable-next-line: max-line-length
-      let URL = `https://us-central1-fb-demo-a57e3.cloudfunctions.net/connectModule?UUID=ggID&MAC=${this.inputString}&order=${this.order}`;
+      let URL = `https://us-central1-fb-demo-a57e3.cloudfunctions.net/connectModule?UUID=${this.database.UUID}&MAC=${this.inputString}&order=${this.order}`;
       if (this.id !== 'undefined') {
         URL += `&id=${this.id}`;
       }

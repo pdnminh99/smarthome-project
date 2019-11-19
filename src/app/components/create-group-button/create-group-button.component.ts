@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {DatabaseService} from '../../../services/Database/database.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { DatabaseService } from '../../../services/Database/database.service';
 
 @Component({
   selector: 'app-create-group-button',
@@ -50,6 +50,8 @@ export class CreateGroupButtonComponent implements OnInit {
   }
 
   handleOk() {
+    console.log(this.databaseService.navigation.length);
+    console.log(this.databaseService.UUID);
     this.isLoading = true;
     this.db.list(`users1/${this.databaseService.UUID}/homes`).set(this.databaseService.navigation.length.toString(), {
       name: this.groupName,
