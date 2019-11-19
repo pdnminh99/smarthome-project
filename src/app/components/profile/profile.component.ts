@@ -10,7 +10,7 @@ import { AuthenticatorService } from 'src/services/Authenticator/authenticator.s
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public databaseService: DatabaseService, private settings: SettingsService, public auth: AuthenticatorService) {
+  constructor(public databaseService: DatabaseService, public settings: SettingsService, public auth: AuthenticatorService) {
   }
 
   ngOnInit() {

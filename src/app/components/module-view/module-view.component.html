@@ -1,118 +1,48 @@
 <nz-collapse [nzBordered]="false">
-  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name">
-    <!-- <p>MAC {{ module.MAC }}</p>
-    <p>Status {{ module.status }}</p>
-    <p>Humidity {{ module.humidity }}%</p>
-    <p>{{ module.isLight ? 'Light ON' : 'light OFF' }}</p>
-    <p>Temp {{ module.temperature }}</p> -->
+  <!--  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name"-->
+  <!--                     style="border: transparent; border-radius: 3px;">-->
+  <nz-collapse-panel *ngFor="let module of modules" [nzHeader]="module.name + '\t[' + module.statusToString + ']'"
+                     style="border: transparent; border-radius: 3px; font-size: 20px;"
+                     [ngStyle]="{ background: module.isAlert ? '#FFCCCB' : 'transparent' }">
+    <nz-row [nzType]='"flex"' [nzJustify]='"center"'>
+      <!-- DISPLAY CHART -->
+      <nz-col [nzSpan]="6">
+        <app-charts></app-charts>
+      </nz-col>
 
-    <nz-card style="margin: 10px 0">
-      <nz-row [nzType]='"flex"' [nzJustify]='"center"'>
-        <!-- DISPLAY CHART -->
-        <nz-col [nzSpan]="6">
-          <app-charts></app-charts>
-        </nz-col>
-
-        <nz-col [nzSpan]="5">
-          <!-- DISPLAY TEMPERATURE -->
-          <nz-row style="margin-bottom:150px; margin-top:70px">
-            <app-info-display [title]='"Temperature"' [data]="module.temperature + '\u00B0C'"></app-info-display>
-          </nz-row>
-          <!-- DISPLAY HUMIDITY -->
-          <nz-row>
-            <app-info-display [title]='"Humidity"' [data]="module.humidity + '\u00B0F'"></app-info-display>
-          </nz-row>
-        </nz-col>
-        <nz-col [nzSpan]="5">
+      <nz-col [nzSpan]="5">
+        <!-- DISPLAY TEMPERATURE -->
+        <nz-row style="margin-bottom:150px; margin-top:70px">
+          <app-info-display [title]='"Temperature"'
+                            [data]="settings.isFarenheit ? (module.temperature * 9 / 5 + 32) + '\u00B0F' : module.temperature + '\u00B0C'"></app-info-display>
+        </nz-row>
+        <!-- DISPLAY HUMIDITY -->
+        <nz-row>
+          <app-info-display [title]='"Humidity"' [data]="module.humidity + '%'"></app-info-display>
+        </nz-row>
+      </nz-col>
+      <!--  DISPLAY STATUS AND BUTTON  -->
+      <nz-col [nzSpan]="5">
+        <nz-card nzBordered style="text-align: center; width: 300px; border-radius: 4px;">
           <!-- DISPLAY STATUS -->
-          <nz-row>
-            <div [ngSwitch]="module.status">
-              <!-- Case disconnected -->
-              <button *ngSwitchCase="1" nz-button style="margin-top: 80px; margin-bottom: 150px;">
-                <app-info-button [type]='"DISCONNECTED"'></app-info-button>
-              </button>
-              <!-- Case smoke detected -->
-              <button *ngSwitchCase="2" nz-button color="warn" nzType="danger"
-                style="margin-top: 80px; margin-bottom: 150px;">
-                <app-info-button [type]='"SMOKE"'></app-info-button>
-              </button>
-              <!-- Case fire detected -->
-              <button *ngSwitchCase="3" nz-button nzType="danger" style="margin-top: 80px; margin-bottom: 150px;">
-                <app-info-button [type]='"FIRE"'></app-info-button>
-              </button>
-              <!-- Nothing detected -->
-              <button *ngSwitchDefault nz-button nzType="primary" style="margin-top: 80px; margin-bottom: 150px;">
-                <app-info-button [type]='"SAFE"'></app-info-button>
-              </button>
-            </div>
-          </nz-row>
-          <nz-row>
-            <!-- DISPLAY BUTTON -->
-            <button *ngIf="module.isLight" nz-button (click)="module.switchLight()" nzType="primary">
-              <app-info-button [type]='"ON"'></app-info-button>
-            </button>
-            <button *ngIf="!module.isLight" nz-button (click)="module.switchLight()" nzType="primary">
-              <app-info-button [type]='"OFF"'></app-info-button>
-            </button>
-          </nz-row>
-        </nz-col>
-
-      </nz-row>
-
-
-
-
-
-      <!-- DISPLAY MODULE TITLE -->
-      <!-- <mat-grid-tile>
-        <app-info-display [title]='"Module Title"' [data]="room.name"></app-info-display>
-      </mat-grid-tile> -->
-
-      <!-- DISPLAY TEMPERATURE -->
-      <!-- <mat-grid-tile>
-        <app-info-display [title]='"Temperature"' [data]="this.room.temperature + '\u00B0C'"></app-info-display>
-      </mat-grid-tile> -->
-
-      <!-- DISPLAY HUMIDITY -->
-      <!-- <mat-grid-tile>
-        <app-info-display [title]='"Humidity"' [data]="this.room.humidity + '\u00B0C'"></app-info-display>
-      </mat-grid-tile> -->
-
-      <!-- DISPLAY STATUS -->
-      <!-- <mat-grid-tile>
-        <div [ngSwitch]="this.room.status"> -->
-      <!-- Case disconnected -->
-      <!-- <button *ngSwitchCase="1" mat-stroked-button disableRipple>
-            <app-info-button [type]='"DISCONNECTED"'></app-info-button>
-          </button> -->
-      <!-- Case smoke detected -->
-      <!-- <button *ngSwitchCase="2" mat-raised-button disableRipple color="warn">
-            <app-info-button [type]='"SMOKE"'></app-info-button>
-          </button> -->
-      <!-- Case fire detected -->
-      <!-- <button *ngSwitchCase="3" mat-raised-button disableRipple color="warn">
-            <app-info-button [type]='"FIRE"'></app-info-button>
-          </button> -->
-      <!-- Nothing detected -->
-      <!-- <button *ngSwitchDefault mat-stroked-button disableRipple color="primary">
-            <app-info-button [type]='"SAFE"'></app-info-button>
+          <h2 nz-title style="height: 100px;"><i nz-icon
+                                                 [nzType]="module.statusToIcon"></i>  {{ module.statusToString }}
+          </h2>
+          <!-- DISPLAY BUTTON -->
+          <button *ngIf="module.isLight" nz-button (click)="module.switchLight()" nzType="primary"
+                  style="height: 80px;">
+            <app-info-button [isLightON]="module.isLight"></app-info-button>
           </button>
-        </div>
-
-      </mat-grid-tile> -->
-      <!-- DISPLAY BUTTON -->
-      <!-- <mat-grid-tile>
-        <button *ngIf="this.room.isLight" mat-flat-button (click)="this.room.switchLight()" color="primary">
-          <app-info-button [type]='"ON"'></app-info-button>
-        </button>
-        <button *ngIf="!this.room.isLight" mat-stroked-button (click)="this.room.switchLight()" color="primary">
-          <app-info-button [type]='"OFF"'></app-info-button>
-        </button>
-        <button mat-flat-button color="primary" style="margin: 0 5px;" (click)='openDialog()'>
-          <app-info-button [type]='"EDIT"'></app-info-button>
-        </button>
-      </mat-grid-tile>
-      </mat-grid-list> -->
-    </nz-card>
+          <button *ngIf="!module.isLight" nz-button (click)="module.switchLight()" nzType="dashed"
+                  style="height: 80px;">
+            <app-info-button [isLightON]="module.isLight"></app-info-button>
+          </button>
+        </nz-card>
+      </nz-col>
+      <nz-col nzSpan="1" style="text-align: right; width: 30%;">
+        <app-extent-module-control [MAC]="module.MAC" [order]="order" [groupID]="groupID"
+                                   [name]="module.name"></app-extent-module-control>
+      </nz-col>
+    </nz-row>
   </nz-collapse-panel>
 </nz-collapse>

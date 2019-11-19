@@ -24,7 +24,7 @@ export class DatabaseService {
   }
 
   public getUserData(user: { uid: string, email: string, name: string, photoURL: string }) {
-    this.UUID = user.uid;
+    this.UUID = 'ggID';
     this.email = user.email;
     this.name = user.name;
     this.photoURL = user.photoURL;
@@ -42,7 +42,7 @@ export class DatabaseService {
         // this.name = snapshots[2].payload.val();
         // // @ts-ignore
         // this.photoURL = snapshots[3].payload.val();
-        console.log(this.email);
+        console.log(this.UUID);
         const homes = snapshots[1].payload.val();
         this.navigation = [];
         // @ts-ignore
@@ -50,7 +50,7 @@ export class DatabaseService {
           // console.log(iterator);
           this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
         }
-        this.router.navigate(["portal"]);
+        this.router.navigate(["portal/profile"]);
         // @ts-ignore
         // this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
       });

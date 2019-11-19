@@ -8,22 +8,48 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit {
-  constructor() {}
+  constructor() { }
+
+  tempData: Array<number> = [0, 0, 0, 0, 0, 0, 0];
+  humidData: Array<number> = [0, 0, 0, 0, 0, 0, 0];
+  tempTime: Array<string> = ['0', '0', '0', '0', '0', '0', '0'];
+  humidTime: Array<string> = ['0', '0', '0', '0', '0', '0', '0'];
+
+  public updateChart(temp: number, humid: number, tChangeTime: string, hChangeTime: string) {
+    console.log(temp.toString() + ' ' + humid.toString() + ' ' + this.tempTime + ' ' + this.humidTime);
+    if (temp != this.tempData[6]) {
+      console.log('got here2');
+
+      this.tempData.shift();
+      this.tempTime.shift();
+      this.tempData.push(temp);
+      this.tempTime.push(tChangeTime);
+
+    }
+
+    if (humid != this.humidData[6]) {
+      console.log('got here3');
+
+      this.humidData.shift();
+      this.humidTime.shift();
+      this.humidData.push(humid);
+      this.humidTime.push(hChangeTime);
+    }
+    console.log('got here4');
+
+  }
+
+  public test() {
+    console.log('got here1');
+    this.updateChart(10, 100, '11:00', '11:00');
+  }
 
   public tempChart = {
     id: 'temperature',
     lineChartData: [
-      { data: [27, 28, 26, 30, 31, 30, 29], label: 'Temperature' }
+      { data: this.tempData, label: 'Temperature' }
     ],
-    lineChartLabels: [
-      '11:30',
-      '11:45',
-      '12:00',
-      '12:15',
-      '12:30',
-      '12:45',
-      '13:00'
-    ],
+    lineChartLabels: this.tempTime,
     lineChartOptions: {
       responsive: true,
       title: {
@@ -52,17 +78,9 @@ export class ChartsComponent implements OnInit {
   public humiChart = {
     id: 'humidity',
     lineChartData: [
-      { data: [99, 88, 100, 89, 102, 85, 80], label: 'Humidity' }
+      { data: this.humidData, label: 'Humidity' }
     ],
-    lineChartLabels: [
-      '11:30',
-      '11:45',
-      '12:00',
-      '12:15',
-      '12:30',
-      '12:45',
-      '13:00'
-    ],
+    lineChartLabels: this.humidTime,
     lineChartOptions: {
       responsive: true,
       layout: {
@@ -95,5 +113,5 @@ export class ChartsComponent implements OnInit {
 
   public charts = [this.tempChart, this.humiChart];
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

@@ -5,7 +5,17 @@ import {Injectable} from '@angular/core';
 })
 export class SettingsService {
 
-  public isFarenheit = false;
+  // tslint:disable-next-line:variable-name
+  private _isFarenheit = false;
+
+  public get isFarenheit(): boolean {
+    return this._isFarenheit;
+  }
+
+  public set isFarenheit(value: boolean) {
+    this._isFarenheit = value;
+    localStorage.setItem('temp', this._isFarenheit ? 'farenheit' : 'celsius');
+  }
 
   public isCollapsed = false;
 
@@ -25,11 +35,17 @@ export class SettingsService {
   }
 
   constructor() {
-    let localTheme = localStorage.getItem('theme');
+    const localTheme = localStorage.getItem('theme');
+    const temp = localStorage.getItem('temp');
     if (localTheme === null) {
       this.isDark = false;
     } else {
       this.isDarkTheme = localTheme !== 'light';
+    }
+    if (temp === null) {
+      this.isFarenheit = false;
+    } else {
+      this._isFarenheit = temp === 'farenheit';
     }
   }
 

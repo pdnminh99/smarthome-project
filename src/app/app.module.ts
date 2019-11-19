@@ -31,12 +31,32 @@ import { InfoButtonComponent } from './components/info-button/info-button.compon
 import { MenuBtnComponent } from './components/menu-btn/menu-btn.component';
 import { HomeViewInfoComponent } from './components/home-view-info/home-view-info.component';
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { GroupMoreOptionsComponent } from './components/group-more-options/group-more-options.component';
+import { ExtentModuleControlComponent } from './components/extent-module-control/extent-module-control.component';
 
 registerLocaleData(en);
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [AppComponent, ChartsComponent, ModuleViewComponent, HomeViewComponent, CreateGroupButtonComponent, SidenavSubmenuComponent, SidenavHeaderComponent, PortalScreenComponent, LoginComponent, SettingsComponent, ProfileComponent, InfoDisplayComponent, InfoButtonComponent, MenuBtnComponent, HomeViewInfoComponent],
+  declarations: [
+    AppComponent,
+    ChartsComponent,
+    ModuleViewComponent,
+    HomeViewComponent,
+    CreateGroupButtonComponent,
+    SidenavSubmenuComponent,
+    SidenavHeaderComponent,
+    PortalScreenComponent,
+    LoginComponent,
+    SettingsComponent,
+    ProfileComponent,
+    MenuBtnComponent,
+    HomeViewInfoComponent,
+    GroupMoreOptionsComponent,
+    InfoDisplayComponent,
+    InfoButtonComponent,
+    ExtentModuleControlComponent
+  ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -51,7 +71,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     AngularFireAuthModule,
   ],
-  providers: [SettingsService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [SettingsService, { provide: NZ_I18N, useValue: en_US }, ChartsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

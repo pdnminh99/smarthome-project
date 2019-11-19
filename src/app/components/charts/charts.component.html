@@ -1,7 +1,7 @@
 <nz-row *ngFor="let c of charts">
   <div id={{c.id}}>
     <canvas style="font-weight: lighter;" baseChart width="75vh" height="50vh" [datasets]="c.lineChartData"
-      [labels]="c.lineChartLabels" [options]="c.lineChartOptions" [chartType]="c.lineChartType"
-      [colors]="c.lineChartColors"></canvas>
+            [labels]="c.lineChartLabels" [options]="c.lineChartOptions" [chartType]="c.lineChartType"
+            [colors]="c.lineChartColors"></canvas>
   </div>
-  <nz-row>
+</nz-row>

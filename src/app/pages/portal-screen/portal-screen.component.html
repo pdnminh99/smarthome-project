@@ -9,9 +9,9 @@
 
     <app-sidenav-submenu [isCollapsed]="settings.isCollapsed" [theme]="settings.theme"></app-sidenav-submenu>
   </nz-sider>
-  <nz-layout [class.layout-dark]="settings.isDark">
+  <nz-layout [class.layout-dark]="settings.isDark" style="height:fit-content">
     <!--    <nz-header>-->
-    <!--      <div class="app-header" [className]="settings.isDark ? 'app-header-dark' : 'app-header-light'">-->
+    <!--      <div class=" app-header" [className]="settings.isDark ? 'app-header-dark' : 'app-header-light'">-->
     <!--    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">-->
     <!--      <i-->
     <!--        class="trigger"-->
@@ -22,7 +22,7 @@
     <!--    </span>-->
     <!--      </div>-->
     <!--    </nz-header>-->
-    <nz-content>
+    <nz-content style=" width: 80%; margin-left: 16%">
       <div [className]="settings.isDark ? 'inner-content-dark' : 'inner-content-light'">
         <router-outlet></router-outlet>
       </div>

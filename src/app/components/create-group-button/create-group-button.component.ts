@@ -8,7 +8,7 @@ import {DatabaseService} from '../../../services/Database/database.service';
   styleUrls: ['./create-group-button.component.scss']
 })
 export class CreateGroupButtonComponent implements OnInit {
-
+  isSuccess = false;
   isVisible = false;
   inputICO = 'android';
   groupName: string;
@@ -51,17 +51,18 @@ export class CreateGroupButtonComponent implements OnInit {
 
   handleOk() {
     this.isLoading = true;
-    this.db.list('users1/ggID/homes').set(this.databaseService.navigation.length.toString(), {
+    this.db.list(`users1/${this.databaseService.UUID}/homes`).set(this.databaseService.navigation.length.toString(), {
       name: this.groupName,
       icon: this.inputICO,
     }).then(value => {
+      this.isSuccess = true;
       setTimeout(() => {
         this.isLoading = false;
         this.isVisible = false;
+        this.isSuccess = false;
         this.groupName = '';
         this.inputICO = 'android';
-      }, 1000);
-      console.log(value);
+      }, 2000);
     });
   }
 }

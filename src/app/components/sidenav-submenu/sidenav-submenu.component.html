@@ -18,7 +18,8 @@
 
     <ul>
       <li nz-menu-item nzMatchRouter *ngFor="let item of this.db.navigation">
-        <a [routerLink]="item.routeURL"><i nz-icon [nzType]="item.icon" nzTheme="fill"></i> {{ item.title }}
+        <a [routerLink]="item.routeURL"><i nz-icon [nzType]="item.icon" nzTheme="fill"></i>
+          {{ item.title.length > 14 ? item.title.substr(0, 14) + '...' : item.title }}
         </a>
       </li>
     </ul>
