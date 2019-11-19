@@ -127,6 +127,7 @@ export class Module {
       // @ts-ignore
       this._NAME = snapshots[3].payload.val();
       var time = `${date.getHours}:${date.getMinutes}`
+      chart = new ChartsComponent();
       chart.updateChart(this.temperature, this.humidity, time, time);
     });
   }

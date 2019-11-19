@@ -125,12 +125,13 @@ export class HomeViewComponent implements OnInit {
       }
       // tslint:disable-next-line: deprecation
       this.http.get(URL).subscribe(response => {
+        console.log(response);
         // @ts-ignore
         this.id = response.error.id;
         // console.log(`After connect this.id = ${this.id}`);
         this.isSuccess = true;
         setTimeout(() => {
-          this.router.navigateByUrl(`/house/${this.id}/${this.title}/${this.order}`).catch(error => console.log(error));
+          this.router.navigateByUrl(`portal/house/${this.id}/${this.title}/${this.order}`).catch(error => console.log(error));
           this.isLoading = false;
           this.inputString = '';
           this.isVisible = false;

@@ -24,7 +24,7 @@ export class DatabaseService {
   }
 
   public getUserData(user: { uid: string, email: string, name: string, photoURL: string }) {
-    this.UUID = 'ggID';
+    this.UUID = user.uid;
     this.email = user.email;
     this.name = user.name;
     this.photoURL = user.photoURL;
@@ -45,12 +45,14 @@ export class DatabaseService {
         console.log(this.UUID);
         const homes = snapshots[1].payload.val();
         this.navigation = [];
-        // @ts-ignore
-        for (let iterator in homes) {
-          // console.log(iterator);
-          this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
+        if (homes != null) {
+          // @ts-ignore
+          for (let iterator in homes) {
+            // console.log(iterator);
+            this.navigation.push(new NavigationItem(homes[iterator].name, homes[iterator].icon, homes[iterator].id, Number(iterator)));
+          }
+          this.router.navigate(["portal/profile"]);
         }
-        this.router.navigate(["portal/profile"]);
         // @ts-ignore
         // this.navigation = [...homes.map(house => new NavigationItem(house.name, house.icon, house.id))];
       });
