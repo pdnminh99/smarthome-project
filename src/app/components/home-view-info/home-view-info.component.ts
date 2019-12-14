@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SettingsService} from '../../../services/Settings/settings.service';
+import {ViewportService} from '../../../services/Viewports/viewport.service';
 
 @Component({
   selector: 'app-home-view-info',
@@ -7,6 +8,8 @@ import {SettingsService} from '../../../services/Settings/settings.service';
   styleUrls: ['./home-view-info.component.scss']
 })
 export class HomeViewInfoComponent implements OnInit {
+
+  private width = 0;
 
   @Input()
   isVisible: boolean;
@@ -20,7 +23,13 @@ export class HomeViewInfoComponent implements OnInit {
   @Input()
   email: string;
 
-  constructor(public settings: SettingsService) {
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output()
+  onSearchEnter = new EventEmitter();
+
+  private searchInput = '';
+
+  constructor(public settings: SettingsService, public viewService: ViewportService) {
   }
 
   ngOnInit() {
@@ -28,6 +37,10 @@ export class HomeViewInfoComponent implements OnInit {
 
   connectButtonTrigger() {
     this.isConnectButtonClicked.emit(null);
+  }
+
+  runSearch(): void {
+    this.onSearchEnter.emit(this.searchInput);
   }
 
 }

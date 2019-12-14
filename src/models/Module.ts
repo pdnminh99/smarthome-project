@@ -1,6 +1,7 @@
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Status } from './Enums';
-import { ChartsComponent } from 'src/app/components/charts/charts.component';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {Status} from './Enums';
+import {ChartsComponent} from 'src/app/components/charts/charts.component';
+import {isUndefined} from 'util';
 
 export class Module {
 
@@ -20,6 +21,23 @@ export class Module {
   }
 
   temperature = 0;
+
+  public get temperatureInFarenheit(): number {
+    return this.temperature * 9 / 5 + 32;
+  }
+
+  private privatePreviousTemperature = 0;
+
+  public get previousTemperature(): number {
+    return this.privatePreviousTemperature;
+  }
+
+  private privatePreviousHumidity = 0;
+
+  public get previousHumidity(): number {
+    return this.privatePreviousHumidity;
+  }
+
   humidity = 0;
   isLight = false;
 
@@ -45,19 +63,21 @@ export class Module {
         if (this.STATUS !== Status.SMOKE && this.STATUS !== Status.FIRE) {
           this.alertThemeInterval = setInterval(() => {
             this.isAlert = !this.isAlert;
-            // console.log(this.isAlert);
           }, 1000);
         }
         break;
       default:
         if (this.STATUS === Status.FIRE || this.STATUS === Status.SMOKE) {
           clearInterval(this.alertThemeInterval);
-          // console.log(`Interval cleared`);
           this.isAlert = false;
         }
         break;
     }
     this.STATUS = value;
+  }
+
+  public get isDanger(): boolean {
+    return this.status === Status.FIRE || this.status === Status.SMOKE;
   }
 
   public get statusToIcon(): string {
@@ -74,6 +94,20 @@ export class Module {
         return 'poweroff';
       default:
         return 'poweroff';
+    }
+  }
+
+  public get statusToColor(): string {
+    switch (this.status) {
+      case Status.OFF:
+      case Status.DISCONNECT:
+        return '#83868D';
+      case Status.FIRE:
+        return 'red';
+      case Status.SMOKE:
+        return 'yellow';
+      case Status.SAFE:
+        return 'green';
     }
   }
 
@@ -105,36 +139,54 @@ export class Module {
   }
 
   private statusMap = {
-    'x': Status.DISCONNECT,
-    '0': Status.OFF,
-    '1': Status.SAFE,
-    '2': Status.SMOKE,
-    '3': Status.FIRE
+    x: Status.DISCONNECT,
+    0: Status.OFF,
+    1: Status.SAFE,
+    2: Status.SMOKE,
+    3: Status.FIRE
   };
 
+  private temperatureUpdateInterval: number;
+
+  private humidityUpdateInterval: number;
+
   constructor(public _MAC: string, private db: AngularFireDatabase, private chart: ChartsComponent) {
-    var date = new Date();
+    // tslint:disable-next-line:prefer-const
+    let date = new Date();
     db.list(`modules/${this.MAC}`).snapshotChanges().subscribe(snapshots => {
+      console.log(`Changes to ${this.MAC} triggered.`);
       // @ts-ignore
-      this.status = this.statusMap[snapshots[2].payload.val()];
+      this.status = this.statusMap[snapshots[3].payload.val()];
       // @ts-ignore
-      const data = snapshots[4].payload.val().split(' ');
-      this.temperature = parseFloat(data[0]);
-      this.humidity = parseFloat(data[1]);
+      const data = snapshots[5].payload.val().split(' ');
+      if (parseFloat(data[0]) !== this.temperature) {
+        this.privatePreviousTemperature = this.temperature;
+        this.temperature = parseFloat(data[0]);
+        if (!isUndefined(this.temperatureUpdateInterval)) {
+          clearTimeout(this.temperatureUpdateInterval);
+          this.temperatureUpdateInterval = undefined;
+        }
+        this.temperatureUpdateInterval = setTimeout(() => this.privatePreviousTemperature = this.temperature, 10000);
+      }
+      if (parseFloat(data[1]) !== this.humidity) {
+        this.privatePreviousHumidity = this.humidity;
+        this.humidity = parseFloat(data[1]);
+        if (!isUndefined(this.humidityUpdateInterval)) {
+          clearTimeout(this.humidityUpdateInterval);
+          this.temperatureUpdateInterval = undefined;
+        }
+        this.humidityUpdateInterval = setTimeout(() => this.privatePreviousHumidity = this.humidity, 10000);
+      }
       // @ts-ignore
-      this.isLight = snapshots[1].payload.val();
-      // console.log(`typeof ${snapshots[1].payload.val()} is ${typeof snapshots[1].payload.val()}\n${this.isLight}`);
+      this.isLight = snapshots[2].payload.val();
       // @ts-ignore
-      this._NAME = snapshots[3].payload.val();
-      var time = `${date.getHours}:${date.getMinutes}`
-      chart = new ChartsComponent();
-      chart.updateChart(this.temperature, this.humidity, time, time);
+      this._NAME = snapshots[4].payload.val();
     });
   }
 
   public switchLight() {
     this.isLight = !this.isLight;
-    this.db.list(`modules`).update(`${this._MAC}`, { led: this.isLight }).catch(error => console.log(error));
+    this.db.list(`modules`).update(`${this._MAC}`, {led: this.isLight}).catch(error => console.log(error));
   }
 
 }

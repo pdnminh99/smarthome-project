@@ -17,7 +17,7 @@
     [title]="title"
     [email]="database.email"
     [isVisible]="isVisible"
-    (isConnectButtonClicked)="isVisible = true; privateInputString = '';"
+    (isConnectButtonClicked)="isVisible = true; privateInputString = '';" (onSearchEnter)="onSearchEnter($event)"
   ></app-home-view-info>
   <app-group-more-options [name]="title" [order]="order" [icon]="'windows'" [groupID]="id"
                           nz-col
@@ -56,4 +56,4 @@
   </button>
 </ng-template>
 
-<app-module-view [modules]="modules" [groupID]="id" [order]="order"></app-module-view>
+<app-module-view [modules]="modulesMatchSearchInput" [groupID]="id" [order]="order"></app-module-view>

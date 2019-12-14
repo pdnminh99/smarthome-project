@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
+import {Component, Input, OnInit} from '@angular/core';
+import {ChartDataSets, ChartOptions} from 'chart.js';
+import {Color, Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-charts',
@@ -8,110 +8,79 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit {
-  constructor() { }
 
-  tempData: Array<number> = [0, 0, 0, 0, 0, 0, 0];
-  humidData: Array<number> = [0, 0, 0, 0, 0, 0, 0];
-  tempTime: Array<string> = ['0', '0', '0', '0', '0', '0', '0'];
-  humidTime: Array<string> = ['0', '0', '0', '0', '0', '0', '0'];
-
-  public updateChart(temp: number, humid: number, tChangeTime: string, hChangeTime: string) {
-    console.log(temp.toString() + ' ' + humid.toString() + ' ' + this.tempTime + ' ' + this.humidTime);
-    if (temp != this.tempData[6]) {
-      console.log('got here2');
-
-      this.tempData.shift();
-      this.tempTime.shift();
-      this.tempData.push(temp);
-      this.tempTime.push(tChangeTime);
-
-    }
-
-    if (humid != this.humidData[6]) {
-      console.log('got here3');
-
-      this.humidData.shift();
-      this.humidTime.shift();
-      this.humidData.push(humid);
-      this.humidTime.push(hChangeTime);
-    }
-    console.log('got here4');
-
+  constructor() {
   }
 
-  public test() {
-    console.log('got here1');
-    this.updateChart(10, 100, '11:00', '11:00');
+  @Input()
+  public set temperature(newTemp: number) {
+    console.log(`New temperature ${newTemp} Celsius.`);
+    this.localTemperatures[0].data.push(newTemp);
+    if (this.localTemperatures[0].data.length <= 10 && this.localTemperatures[0].data.length > 0) {
+      this.temperatureTimeline.push(`${this.temperatureTimeline.length}`);
+    } else {
+      this.localTemperatures[0].data = this.localTemperatures[0].data.slice(1, this.localTemperatures[0].data.length);
+    }
   }
 
-  public tempChart = {
-    id: 'temperature',
-    lineChartData: [
-      { data: this.tempData, label: 'Temperature' }
-    ],
-    lineChartLabels: this.tempTime,
-    lineChartOptions: {
+  @Input()
+  public set humidity(newHumidity: number) {
+    console.log(`New Humidity ${newHumidity}%.`);
+    this.localHumidity[0].data.push(newHumidity);
+    if (this.localHumidity[0].data.length <= 10 && this.localHumidity[0].data.length > 0) {
+      this.humidityTimeline.push(`${this.humidityTimeline.length}`);
+    } else {
+      this.localHumidity[0].data = this.localHumidity[0].data.slice(1, this.localHumidity[0].data.length);
+    }
+  }
+
+  private localTemperatures: ChartDataSets[] = [{
+    data: [],
+    label: 'Temperature'
+  }];
+
+  private localHumidity: ChartDataSets[] = [{
+    data: [],
+    label: 'Humidity'
+  }];
+
+  temperatureTimeline: Label[] = [];
+  humidityTimeline: Label[] = [];
+
+  ngOnInit(): void {
+  }
+
+  getChartColors(isTemperatureChart: boolean): Color[] {
+    return [{
+      backgroundColor: isTemperatureChart ? 'rgba(255, 31, 31, 0.2)' : 'rgba(0, 4, 245, 0.2)',
+      borderColor: isTemperatureChart ? 'rgba(255, 31, 31, 1)' : 'rgba(0, 4, 245, 1)',
+      pointBorderColor: '#fff',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }];
+  }
+
+  getChartOptions(isTemperatureChart: boolean): ChartOptions {
+    const options: ChartOptions = {
       responsive: true,
       title: {
         display: true,
-        text: 'Temperature',
+        text: isTemperatureChart ? 'Temperature' : 'Humidity',
         fontSize: 20,
-        fontColor: 'red'
+        fontColor: isTemperatureChart ? 'red' : 'blue'
       },
       legend: {
         display: false
       }
-    },
-    lineChartColors: [
-      {
-        backgroundColor: 'rgba(255, 31, 31, 0.2)',
-        borderColor: 'rgba(255, 31, 31, 1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      }
-    ],
-    lineChartType: 'line'
-  };
-
-  public humiChart = {
-    id: 'humidity',
-    lineChartData: [
-      { data: this.humidData, label: 'Humidity' }
-    ],
-    lineChartLabels: this.humidTime,
-    lineChartOptions: {
-      responsive: true,
-      layout: {
+    };
+    if (!isTemperatureChart) {
+      options.layout = {
         padding: {
           top: 20
         }
-      },
-      title: {
-        display: true,
-        text: 'Humidity',
-        fontSize: 20,
-        fontColor: 'rgba(0, 4, 245, 0.7)'
-      },
-      legend: {
-        display: false
-      }
-    },
-    lineChartColors: [
-      {
-        backgroundColor: 'rgba(0, 4, 245, 0.2)',
-        borderColor: 'rgba(0, 4, 245, 1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      }
-    ],
-    lineChartType: 'line'
-  };
-
-  public charts = [this.tempChart, this.humiChart];
-
-  ngOnInit() { }
+      };
+    }
+    return options;
+  }
 }

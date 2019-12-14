@@ -10,3 +10,7 @@ export enum Status {
   SMOKE,
   FIRE
 }
+
+export enum ScreenSize {
+  SMALL, MEDIUM, BIG
+}

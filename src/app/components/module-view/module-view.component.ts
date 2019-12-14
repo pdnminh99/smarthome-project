@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Module} from '../../../models/Module';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {DatabaseService} from '../../../services/Database/database.service';
 import {SettingsService} from '../../../services/Settings/settings.service';
 
 @Component({
