@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SettingsService} from '../../../services/Settings/settings.service';
-import {ViewportService} from '../../../services/Viewports/viewport.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SettingsService } from '../../../services/Settings/settings.service';
+import { ViewportService } from '../../../services/Viewports/viewport.service';
+import { NavigationService } from 'src/services/Navigation/navigation.service';
 
 @Component({
   selector: 'app-home-view-info',
@@ -8,8 +9,6 @@ import {ViewportService} from '../../../services/Viewports/viewport.service';
   styleUrls: ['./home-view-info.component.scss']
 })
 export class HomeViewInfoComponent implements OnInit {
-
-  private width = 0;
 
   @Input()
   isVisible: boolean;
@@ -27,13 +26,14 @@ export class HomeViewInfoComponent implements OnInit {
   @Output()
   onSearchEnter = new EventEmitter();
 
-  private searchInput = '';
+  public searchInput = '';
 
-  constructor(public settings: SettingsService, public viewService: ViewportService) {
-  }
+  constructor(
+    public settings: SettingsService,
+    public viewService: ViewportService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   connectButtonTrigger() {
     this.isConnectButtonClicked.emit(null);
@@ -42,5 +42,4 @@ export class HomeViewInfoComponent implements OnInit {
   runSearch(): void {
     this.onSearchEnter.emit(this.searchInput);
   }
-
 }

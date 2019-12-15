@@ -1,27 +1,54 @@
-<h1 nz-title style="margin-bottom: 5px;" [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }">{{ title }}</h1>
+<app-group-edit-form
+  style="margin-bottom: 5px;"
+  [ngStyle]="{ color: settings.isDark ? '#fff' : '#000' }"
+></app-group-edit-form>
 <p>{{ email }}</p>
 <div style="margin: 0; padding: 0;">
   <nz-button-group>
-    <nz-input-group *ngIf="true" [nzSuffix]="clear" [nzPrefix]="search" style="width: 250px; height: 29px;">
-      <input nz-input (keyup.enter)="runSearch()" [(ngModel)]="searchInput" placeholder="Search from here ..."
-             style="text-align: center; border-radius: 4px 0 0 4px; border-style: solid; border-color: grey; border-width: 1px;">
+    <nz-input-group
+      *ngIf="true"
+      [nzSuffix]="clear"
+      [nzPrefix]="search"
+      style="width: 250px; height: 29px;"
+    >
+      <input
+        nz-input
+        (keyup.enter)="runSearch()"
+        [(ngModel)]="searchInput"
+        placeholder="Search from here ..."
+        style="text-align: center; border-radius: 4px 0 0 4px; border-style: solid; border-color: grey; border-width: 1px;"
+      />
       <ng-template #clear>
-        <i nz-icon nz-tooltip
-           class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="searchInput.length > 0"
-           (click)="searchInput = ''; runSearch();"></i>
+        <i
+          nz-icon
+          nz-tooltip
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          *ngIf="searchInput.length > 0"
+          (click)="searchInput = ''; runSearch()"
+        ></i>
       </ng-template>
       <ng-template #search>
         <i nz-icon nzType="search" nzTheme="outline"></i>
       </ng-template>
     </nz-input-group>
-    <button *ngIf="false"
-            style="box-shadow: none; margin: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; height: 30px;"
-            nz-button nzType="dashed" nzShape="round">
+    <button
+      *ngIf="false"
+      style="box-shadow: none; margin: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; height: 30px;"
+      nz-button
+      nzType="dashed"
+      nzShape="round"
+    >
       <i nz-icon nzType="search" nzTheme="fill"></i>
     </button>
-    <button style="box-shadow: none; margin: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; height: 32px;"
-            nz-button nzType="primary"
-            nzShape="round" (click)="connectButtonTrigger()">
+    <button
+      style="box-shadow: none; margin: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; height: 32px;"
+      nz-button
+      nzType="primary"
+      nzShape="round"
+      (click)="connectButtonTrigger()"
+    >
       <i nz-icon nzType="api" nzTheme="fill"></i> Connect
     </button>
   </nz-button-group>

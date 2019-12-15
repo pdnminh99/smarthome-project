@@ -14,15 +14,16 @@
     nz-col
     nzSpan="9"
     style="text-align: center;"
-    [title]="title"
+    [title]="navigation.title"
     [email]="database.email"
     [isVisible]="isVisible"
-    (isConnectButtonClicked)="isVisible = true; privateInputString = '';" (onSearchEnter)="onSearchEnter($event)"
+    (isConnectButtonClicked)="isVisible = true; privateInputString = ''"
+    (onSearchEnter)="onSearchEnter($event)"
   ></app-home-view-info>
-  <app-group-more-options [name]="title" [order]="order" [icon]="'windows'" [groupID]="id"
-                          nz-col
-                          nzSpan="1"
-                          style="text-align: right; width: 30%;"
+  <app-group-more-options
+    nz-col
+    nzSpan="1"
+    style="text-align: right; width: 30%;"
   ></app-group-more-options>
 </div>
 
@@ -33,14 +34,24 @@
   (nzOnCancel)="handleCancel()"
 >
   <div style="text-align: center" *ngIf="isSuccess">
-    <img src="../../../assets/checkanimation.gif" style="height: 150px;">
+    <img src="../../../assets/checkanimation.gif" style="height: 150px;" />
   </div>
   <div *ngIf="!isSuccess">
     <h4>Enter MAC address (Only accept keys among [0-9] and [A-F])</h4>
-    <input (keydown.backspace)="backSpacePressed()" nz-input placeholder="Type here ..." [(ngModel)]="inputString"
-           style="margin-bottom: 10px; font-weight: bold; font-size: 24px; text-align: center; height: 30px; line-height: 34px;"/>
-    <nz-alert [nzMessage]="errorMessage" nzCloseable (nzOnClose)="errorMessage = ''" nzType="error"
-              *ngIf="errorMessage.length > 0"></nz-alert>
+    <input
+      (keydown.backspace)="backSpacePressed()"
+      nz-input
+      placeholder="Type here ..."
+      [(ngModel)]="inputString"
+      style="margin-bottom: 10px; font-weight: bold; font-size: 24px; text-align: center; height: 30px; line-height: 34px;"
+    />
+    <nz-alert
+      [nzMessage]="errorMessage"
+      nzCloseable
+      (nzOnClose)="errorMessage = ''"
+      nzType="error"
+      *ngIf="errorMessage.length > 0"
+    ></nz-alert>
   </div>
 </nz-modal>
 
@@ -56,4 +67,4 @@
   </button>
 </ng-template>
 
-<app-module-view [modules]="modulesMatchSearchInput" [groupID]="id" [order]="order"></app-module-view>
+<app-module-view [modules]="modulesMatchSearchInput"></app-module-view>

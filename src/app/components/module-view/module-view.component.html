@@ -1,71 +1,140 @@
-<nz-list nzItemLayout="horizontal" style="width: 100%;" [nzDataSource]="modules" [nzRenderItem]="module">
+<nz-list
+  nzItemLayout="horizontal"
+  style="width: 100%;"
+  [nzDataSource]="modules"
+  [nzRenderItem]="module"
+>
   <ng-template #module let-module>
     <nz-list-item style="width: 100%;">
-      <div style="width: 100%; border-radius: 5px;" [className]="module.isAlert ? 'alert' : ''">
-        <h3 style="width: 100%; text-align: center; font-size: 30px; font-weight: bold;"
-            [className]="settings.isDark ? 'normal-dark' : 'normal-light'">{{ module.name }}</h3>
-        <nz-row nzType='flex' nzJustify="center">
+      <div
+        style="width: 100%; border-radius: 5px;"
+        [className]="module.isAlert ? 'alert' : ''"
+      >
+        <h3
+          style="width: 100%; text-align: center; font-size: 30px; font-weight: bold;"
+          [className]="settings.isDark ? 'normal-dark' : 'normal-light'"
+        >
+          {{ module.name }}
+        </h3>
+        <nz-row nzType="flex" nzJustify="center">
           <!-- DISPLAY CHART -->
           <nz-col [nzSpan]="6">
-            <app-charts [className]="settings.isDark ? 'normal-dark' : 'normal-light'" [humidity]="module.humidity"
-                        [temperature]="settings.isFarenheit ? module.temperatureInFarenheit : module.temperature"></app-charts>
+            <app-charts
+              [className]="settings.isDark ? 'normal-dark' : 'normal-light'"
+              [humidity]="module.humidity"
+              [temperature]="
+                settings.isFarenheit
+                  ? module.temperatureInFarenheit
+                  : module.temperature
+              "
+            ></app-charts>
           </nz-col>
 
           <nz-col [nzSpan]="5">
             <!-- DISPLAY TEMPERATURE -->
-            <nz-row style="margin-bottom:150px; margin-top:70px; text-align: center;">
-              <nz-statistic [nzValueStyle]="{ color: this.settings.isDark ? '#fff' : '#000', size: '20px' }"
-                            nzTitle="Temperature"
-                            [nzPrefix]="tempprefix"
-                            [nzSuffix]="settings.isFarenheit ? '\u00B0F' : '\u00B0C'"
-                            [nzValue]="settings.isFarenheit ? module.temperatureInFarenheit : module.temperature | number: '1.0-2'"></nz-statistic>
+            <nz-row
+              style="margin-bottom:150px; margin-top:70px; text-align: center;"
+            >
+              <nz-statistic
+                [nzValueStyle]="{
+                  color: this.settings.isDark ? '#fff' : '#000',
+                  size: '20px'
+                }"
+                nzTitle="Temperature"
+                [nzPrefix]="tempprefix"
+                [nzSuffix]="settings.isFarenheit ? '\u00B0F' : '\u00B0C'"
+                [nzValue]="
+                  settings.isFarenheit
+                    ? module.temperatureInFarenheit
+                    : (module.temperature | number: '1.0-2')
+                "
+              ></nz-statistic>
               <ng-template #tempprefix>
-                <i nz-icon *ngIf="module.previousTemperature > module.temperature"
-                   nzType="arrow-down"></i>
-                <i nz-icon
-                   *ngIf="module.previousTemperature < module.temperature"
-                   nzType="arrow-up"></i>
+                <i
+                  nz-icon
+                  *ngIf="module.previousTemperature > module.temperature"
+                  nzType="arrow-down"
+                ></i>
+                <i
+                  nz-icon
+                  *ngIf="module.previousTemperature < module.temperature"
+                  nzType="arrow-up"
+                ></i>
               </ng-template>
             </nz-row>
             <!-- DISPLAY HUMIDITY -->
             <nz-row style="text-align: center;">
-              <nz-statistic style="color: #000" [class.normal-dark]="settings.isDark"
-                            [nzValueStyle]="{ color: this.settings.isDark ? '#fff' : '#000', size: '20px' }"
-                            nzTitle="Humidity"
-                            [nzPrefix]="humidprefix"
-                            nzSuffix="%"
-                            [nzValue]="module.humidity | number: '1.0-2'"></nz-statistic>
+              <nz-statistic
+                style="color: #000"
+                [class.normal-dark]="settings.isDark"
+                [nzValueStyle]="{
+                  color: this.settings.isDark ? '#fff' : '#000',
+                  size: '20px'
+                }"
+                nzTitle="Humidity"
+                [nzPrefix]="humidprefix"
+                nzSuffix="%"
+                [nzValue]="module.humidity | number: '1.0-2'"
+              ></nz-statistic>
               <ng-template #humidprefix>
-                <i nz-icon *ngIf="module.previousHumidity > module.humidity"
-                   nzType="arrow-down"></i>
-                <i nz-icon
-                   *ngIf="module.previousHumidity < module.humidity"
-                   nzType="arrow-up"></i>
+                <i
+                  nz-icon
+                  *ngIf="module.previousHumidity > module.humidity"
+                  nzType="arrow-down"
+                ></i>
+                <i
+                  nz-icon
+                  *ngIf="module.previousHumidity < module.humidity"
+                  nzType="arrow-up"
+                ></i>
               </ng-template>
             </nz-row>
           </nz-col>
           <!--  DISPLAY STATUS AND BUTTON  -->
           <nz-col [nzSpan]="5">
-            <nz-card nzBordered style="text-align: center; width: 300px; border-radius: 4px;">
+            <nz-card
+              nzBordered
+              style="text-align: center; width: 300px; border-radius: 4px;"
+            >
               <!-- DISPLAY STATUS -->
-              <h2 nz-title style="height: 100px;" [ngStyle]="{ color: module.statusToColor }">
-                <i nz-icon
-                   [nzType]="module.statusToIcon"></i>  {{ module.statusToString }}
+              <h2
+                nz-title
+                style="height: 100px;"
+                [ngStyle]="{ color: module.statusToColor }"
+              >
+                <i nz-icon [nzType]="module.statusToIcon"></i>
+                {{ module.statusToString }}
               </h2>
               <!-- DISPLAY BUTTON -->
-              <button [disabled]="module.isDanger" *ngIf="module.isLight" nz-button (click)="module.switchLight()" nzType="primary"
-                      style="height: 80px;">
+              <button
+                [disabled]="module.isDanger"
+                *ngIf="module.isLight"
+                nz-button
+                (click)="module.switchLight()"
+                nzType="primary"
+                style="height: 80px;"
+              >
                 <app-info-button [isLightON]="module.isLight"></app-info-button>
               </button>
-              <button [disabled]="module.isDanger" *ngIf="!module.isLight" nz-button (click)="module.switchLight()" nzType="dashed"
-                      style="height: 80px;">
+              <button
+                [disabled]="module.isDanger"
+                *ngIf="!module.isLight"
+                nz-button
+                (click)="module.switchLight()"
+                nzType="dashed"
+                style="height: 80px;"
+              >
                 <app-info-button [isLightON]="module.isLight"></app-info-button>
               </button>
             </nz-card>
           </nz-col>
           <nz-col nzSpan="1" style="text-align: right; width: 30%;">
-            <app-extent-module-control [MAC]="module.MAC" [order]="order" [groupID]="groupID"
-                                       [name]="module.name"></app-extent-module-control>
+            <app-extent-module-control
+              [MAC]="module.MAC"
+              [order]="navigationService.order"
+              [groupID]="navigationService.groupID"
+              [name]="module.name"
+            ></app-extent-module-control>
           </nz-col>
         </nz-row>
       </div>

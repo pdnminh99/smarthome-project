@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Module} from '../../../models/Module';
 import {SettingsService} from '../../../services/Settings/settings.service';
+import { NavigationService } from 'src/services/Navigation/navigation.service';
 
 @Component({
   selector: 'app-module-view',
@@ -10,15 +11,9 @@ import {SettingsService} from '../../../services/Settings/settings.service';
 export class ModuleViewComponent implements OnInit {
 
   @Input()
-  order: number;
-
-  @Input()
-  groupID: string;
-
-  @Input()
   modules: Array<Module>;
 
-  constructor(public settings: SettingsService) {
+  constructor(public settings: SettingsService, public navigationService: NavigationService) {
   }
 
   ngOnInit() {

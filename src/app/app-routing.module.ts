@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'portal', component: PortalScreenComponent, canActivate: [LoginGuard], children: [
       { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] },
       { path: 'settings', component: SettingsComponent, canActivate: [LoginGuard] },
-      { path: 'house/:id/:name/:order', component: HomeViewComponent, canActivate: [LoginGuard] },
+      { path: 'house/:order', component: HomeViewComponent, canActivate: [LoginGuard] },
     ]
   },
 

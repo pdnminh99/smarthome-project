@@ -10,7 +10,7 @@ export class NavigationItem {
 
   public set id(value: string) {
     this.ID = value;
-    this.routeURL = `house/${this.id}/${this.title}/${this.order}`;
+    this.routeURL = `house/${this.order}`;
   }
 
   public title: string;
@@ -22,6 +22,5 @@ export class NavigationItem {
     this.icon = icon;
     this.order = order;
     this.id = id;
-    // console.log(`${this.title} has ${this.order}`);
   }
 }
