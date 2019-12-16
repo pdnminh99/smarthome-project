@@ -34,6 +34,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {GroupMoreOptionsComponent} from './components/group-more-options/group-more-options.component';
 import {ExtentModuleControlComponent} from './components/extent-module-control/extent-module-control.component';
 import { GroupEditFormComponent } from './group-edit-form/group-edit-form.component';
+import { ModuleEditFormComponent } from './module-edit-form/module-edit-form.component';
 
 registerLocaleData(en);
 
@@ -57,7 +58,8 @@ registerLocaleData(en);
     InfoDisplayComponent,
     InfoButtonComponent,
     ExtentModuleControlComponent,
-    GroupEditFormComponent
+    GroupEditFormComponent,
+    ModuleEditFormComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

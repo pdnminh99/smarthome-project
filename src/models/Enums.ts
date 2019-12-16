@@ -11,6 +11,12 @@ export enum Status {
   FIRE
 }
 
+export enum Motion {
+  DISCONNECT,
+  NO_MOTION,
+  MOTION
+}
+
 export enum ScreenSize {
   SMALL, MEDIUM, BIG
 }

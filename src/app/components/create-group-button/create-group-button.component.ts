@@ -50,8 +50,8 @@ export class CreateGroupButtonComponent implements OnInit {
   }
 
   handleOk() {
-    console.log(this.databaseService.navigation.length);
-    console.log(this.databaseService.UUID);
+    // console.log(this.databaseService.navigation.length);
+    // console.log(this.databaseService.UUID);
     this.isLoading = true;
     this.db.list(`users1/${this.databaseService.UUID}/homes`).set(this.databaseService.navigation.length.toString(), {
       name: this.groupName,

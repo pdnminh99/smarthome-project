@@ -3,12 +3,12 @@
     <ul>
       <li nz-menu-item nzMatchRouter>
         <a routerLink="profile"
-          ><i nz-icon nzType="profile" nzTheme="fill"></i> Profile
+          ><i nz-icon nzType="profile" nzTheme="outline"></i> Profile
         </a>
       </li>
       <li nz-menu-item nzMatchRouter>
         <a routerLink="settings"
-          ><i nz-icon nzType="setting" nzTheme="fill"></i> Settings
+          ><i nz-icon nzType="setting" nzTheme="outline"></i> Settings
         </a>
       </li>
     </ul>
@@ -20,7 +20,7 @@
         <a
           [routerLink]="item.routeURL"
           (click)="navigation.changeNavigation(item);"
-          ><i nz-icon [nzType]="item.icon" nzTheme="fill"></i>
+          ><i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
           {{
             item.title.length > 14
               ? item.title.substr(0, 14) + "..."

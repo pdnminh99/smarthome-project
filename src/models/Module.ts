@@ -1,5 +1,5 @@
 import {AngularFireDatabase} from '@angular/fire/database';
-import {Status} from './Enums';
+import {Motion, Status} from './Enums';
 import {ChartsComponent} from 'src/app/components/charts/charts.component';
 import {isUndefined} from 'util';
 
@@ -138,6 +138,55 @@ export class Module {
     return this._MAC;
   }
 
+  private MOTION: Motion;
+
+  public get motion(): Motion {
+    return this.MOTION;
+  }
+
+  public get motionToIcon(): string {
+    switch (this.motion) {
+      case Motion.DISCONNECT:
+        return 'disconnect';
+      case Motion.MOTION:
+        return 'loading';
+      case Motion.NO_MOTION:
+        return 'line';
+      default:
+        return 'disconnect';
+    }
+  }
+
+  public get motionToColor(): string {
+    switch (this.motion) {
+      case Motion.MOTION:
+        return 'green';
+      case Motion.DISCONNECT:
+      case Motion.NO_MOTION:
+      default:
+        return '#83868D';
+    }
+  }
+
+  public get motionToString(): string {
+    switch (this.motion) {
+      case Motion.DISCONNECT:
+        return 'No Connection';
+      case Motion.MOTION:
+        return 'Motion Detected';
+      case Motion.NO_MOTION:
+        return 'No Motion';
+      default:
+        return 'Unknown Motion Value';
+    }
+  }
+
+  private hasMotionMap = {
+    x: Motion.DISCONNECT,
+    0: Motion.NO_MOTION,
+    1: Motion.MOTION,
+  };
+
   private statusMap = {
     x: Status.DISCONNECT,
     0: Status.OFF,
@@ -151,10 +200,9 @@ export class Module {
   private humidityUpdateInterval: number;
 
   constructor(public _MAC: string, private db: AngularFireDatabase, private chart: ChartsComponent) {
-    // tslint:disable-next-line:prefer-const
-    let date = new Date();
     db.list(`modules/${this.MAC}`).snapshotChanges().subscribe(snapshots => {
-      console.log(`Changes to ${this.MAC} triggered.`);
+      // @ts-ignore
+      this.MOTION = this.hasMotionMap[snapshots[1].payload.val()];
       // @ts-ignore
       this.status = this.statusMap[snapshots[3].payload.val()];
       // @ts-ignore

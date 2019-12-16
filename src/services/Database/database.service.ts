@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, snapshotChanges, AngularFireAction, DatabaseSnapshot } from '@angular/fire/database';
-import { NavigationItem } from '../../models/NavigationItem';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {AngularFireDatabase, snapshotChanges, AngularFireAction, DatabaseSnapshot} from '@angular/fire/database';
+import {NavigationItem} from '../../models/NavigationItem';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +14,6 @@ export class DatabaseService {
   public name: string;
   public photoURL: string;
 
-  public checkIfExisted(user: { uid: string, email: string, name: string, photoURL: string }) {
-    this.db.list(`users1/${user.uid}`).query.once('value').then(value => {
-      if (value.val() == null) {
-        this.db.list('users1').set(user.uid, { 'email': user.email, 'homes': { '0': '0' }, 'name': user.name, 'photoURL': user.photoURL });
-      }
-    });
-  }
-
   public getUserData(user: { uid: string, email: string, name: string, photoURL: string }) {
     this.UUID = user.uid;
     this.email = user.email;
@@ -30,7 +22,7 @@ export class DatabaseService {
     this.userSubscription = this.db.list(`users1/${this.UUID}`).snapshotChanges();
     this.db.list(`users1/${this.UUID}`).query.once('value').then(value => {
       if (value.val() === null) {
-        return this.db.list('users1').set(user.uid, { 'email': user.email, 'name': user.name, 'photoURL': user.photoURL });
+        return this.db.list('users1').set(user.uid, {email: user.email, name: user.name, photoURL: user.photoURL});
       }
       return;
     }).then(_ => {

@@ -14,7 +14,7 @@ export class ChartsComponent implements OnInit {
 
   @Input()
   public set temperature(newTemp: number) {
-    console.log(`New temperature ${newTemp} Celsius.`);
+    // console.log(`New temperature ${newTemp} Celsius.`);
     this.localTemperatures[0].data.push(newTemp);
     if (this.localTemperatures[0].data.length <= 10 && this.localTemperatures[0].data.length > 0) {
       this.temperatureTimeline.push(`${this.temperatureTimeline.length}`);
@@ -25,7 +25,7 @@ export class ChartsComponent implements OnInit {
 
   @Input()
   public set humidity(newHumidity: number) {
-    console.log(`New Humidity ${newHumidity}%.`);
+    // console.log(`New Humidity ${newHumidity}%.`);
     this.localHumidity[0].data.push(newHumidity);
     if (this.localHumidity[0].data.length <= 10 && this.localHumidity[0].data.length > 0) {
       this.humidityTimeline.push(`${this.humidityTimeline.length}`);

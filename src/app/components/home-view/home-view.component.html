@@ -29,7 +29,7 @@
 
 <nz-modal
   [(nzVisible)]="isVisible"
-  nzTitle="Create group"
+  nzTitle="Connect Module"
   [nzFooter]="modalFooter"
   (nzOnCancel)="handleCancel()"
 >
@@ -43,7 +43,7 @@
       nz-input
       placeholder="Type here ..."
       [(ngModel)]="inputString"
-      style="margin-bottom: 10px; font-weight: bold; font-size: 24px; text-align: center; height: 30px; line-height: 34px;"
+      style="margin-bottom: 10px; font-weight: bold; font-size: 24px; text-align: center; height: 60px; line-height: 34px;"
     />
     <nz-alert
       [nzMessage]="errorMessage"

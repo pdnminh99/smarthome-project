@@ -10,12 +10,14 @@
         style="width: 100%; border-radius: 5px;"
         [className]="module.isAlert ? 'alert' : ''"
       >
-        <h3
-          style="width: 100%; text-align: center; font-size: 30px; font-weight: bold;"
-          [className]="settings.isDark ? 'normal-dark' : 'normal-light'"
-        >
-          {{ module.name }}
-        </h3>
+        <app-module-edit-form [module]="module" [order]="navigationService.order"
+                              [groupID]="navigationService.groupID"></app-module-edit-form>
+        <!--        <h3-->
+        <!--          style="width: 100%; text-align: center; font-size: 30px; font-weight: bold;"-->
+        <!--          [className]="settings.isDark ? 'normal-dark' : 'normal-light'"-->
+        <!--        >-->
+        <!--          {{ module.name }}-->
+        <!--        </h3>-->
         <nz-row nzType="flex" nzJustify="center">
           <!-- DISPLAY CHART -->
           <nz-col [nzSpan]="6">
@@ -96,15 +98,17 @@
               nzBordered
               style="text-align: center; width: 300px; border-radius: 4px;"
             >
+              <nz-divider nzType="horizontal" nzText="Status"></nz-divider>
               <!-- DISPLAY STATUS -->
-              <h2
+              <h3
                 nz-title
-                style="height: 100px;"
+                style="height: 50px;"
                 [ngStyle]="{ color: module.statusToColor }"
               >
                 <i nz-icon [nzType]="module.statusToIcon"></i>
                 {{ module.statusToString }}
-              </h2>
+              </h3>
+              <nz-divider nzType="horizontal" nzText="Lights"></nz-divider>
               <!-- DISPLAY BUTTON -->
               <button
                 [disabled]="module.isDanger"
@@ -126,6 +130,15 @@
               >
                 <app-info-button [isLightON]="module.isLight"></app-info-button>
               </button>
+              <nz-divider nzType="horizontal" nzText="Motion"></nz-divider>
+              <h3
+                nz-title
+                style="height: 50px;"
+                [ngStyle]="{ color: module.motionToColor }"
+              >
+                <i nz-icon [nzType]="module.motionToIcon"></i>
+                {{ module.motionToString }}
+              </h3>
             </nz-card>
           </nz-col>
           <nz-col nzSpan="1" style="text-align: right; width: 30%;">

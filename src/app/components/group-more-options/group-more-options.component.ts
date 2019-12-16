@@ -69,7 +69,7 @@ export class GroupMoreOptionsComponent implements OnInit {
         `https://us-central1-fb-demo-a57e3.cloudfunctions.net/deleteGroup?order=${this.navigationService.order}&UUID=${this.database.UUID}`
       )
       .subscribe(response => {
-        console.log(response);
+        // console.log(response);
         this.errorMessage = '';
         this.isSuccess = true;
         setTimeout(() => {
