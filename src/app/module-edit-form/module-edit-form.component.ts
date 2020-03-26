@@ -35,7 +35,7 @@ export class ModuleEditFormComponent implements OnInit {
     this.isHover = state;
   }
 
-  @ViewChild('textbox', {static: false})
+  @ViewChild('textbox')
   textBox: ElementRef;
 
   public isHover = false;
