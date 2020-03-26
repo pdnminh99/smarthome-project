@@ -1,7 +1,7 @@
-<nz-layout class="app-layout">
+<nz-layout class="app-layout" [class.layout-dark]="settings.isDark">
   <!-- App sidebar -->
   <nz-sider class="menu-sidebar" [nzTheme]="settings.theme" nzCollapsible nzWidth="200px" nzBreakpoint="md"
-    [(nzCollapsed)]="settings.isCollapsed" [nzTrigger]="null">
+            [(nzCollapsed)]="settings.isCollapsed" [nzTrigger]="null">
 
     <app-sidenav-header [isCollapsed]="settings.isCollapsed" style="width: 100%"></app-sidenav-header>
 
@@ -10,18 +10,6 @@
     <app-sidenav-submenu [isCollapsed]="settings.isCollapsed" [theme]="settings.theme"></app-sidenav-submenu>
   </nz-sider>
   <nz-layout [class.layout-dark]="settings.isDark" style="height:fit-content">
-    <!--    <nz-header>-->
-    <!--      <div class=" app-header" [className]="settings.isDark ? 'app-header-dark' : 'app-header-light'">-->
-    <!--    <span class="header-trigger" (click)="isCollapsed = !isCollapsed">-->
-    <!--      <i-->
-    <!--        class="trigger"-->
-    <!--        nz-icon-->
-    <!--        [className]="settings.isDark ? 'icon-dark' : 'icon-light'"-->
-    <!--        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"-->
-    <!--      ></i>-->
-    <!--    </span>-->
-    <!--      </div>-->
-    <!--    </nz-header>-->
     <nz-content style=" width: 80%; margin-left: 16%">
       <div [className]="settings.isDark ? 'inner-content-dark' : 'inner-content-light'">
         <router-outlet></router-outlet>

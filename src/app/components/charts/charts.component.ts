@@ -34,12 +34,12 @@ export class ChartsComponent implements OnInit {
     }
   }
 
-  private localTemperatures: ChartDataSets[] = [{
+  public localTemperatures: ChartDataSets[] = [{
     data: [],
     label: 'Temperature'
   }];
 
-  private localHumidity: ChartDataSets[] = [{
+  public localHumidity: ChartDataSets[] = [{
     data: [],
     label: 'Humidity'
   }];

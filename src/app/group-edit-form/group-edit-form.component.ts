@@ -11,7 +11,6 @@ import { SettingsService } from 'src/services/Settings/settings.service';
 import { NavigationService } from 'src/services/Navigation/navigation.service';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from 'src/services/Database/database.service';
-
 @Component({
   selector: 'app-group-edit-form',
   templateUrl: './group-edit-form.component.html',
