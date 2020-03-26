@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SettingsService} from '../../../services/Settings/settings.service';
+import {SettingsService} from '../../services/Settings/settings.service';
 
 @Component({
   selector: 'app-settings',

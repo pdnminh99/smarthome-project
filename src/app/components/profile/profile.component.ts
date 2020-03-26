@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from '../../../services/Database/database.service';
-import { SettingsService } from '../../../services/Settings/settings.service';
-import { AuthenticatorService } from 'src/services/Authenticator/authenticator.service';
+import { DatabaseService } from '../../services/Database/database.service';
+import { SettingsService } from '../../services/Settings/settings.service';
+import { AuthenticatorService } from 'src/app/services/Authenticator/authenticator.service';
 
 @Component({
   selector: 'app-profile',

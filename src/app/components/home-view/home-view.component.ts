@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Module } from '../../../models/Module';
-import { Observable } from 'rxjs';
-import { DatabaseService } from '../../../services/Database/database.service';
-import { SettingsService } from '../../../services/Settings/settings.service';
-import { HttpClient } from '@angular/common/http';
-import { ChartsComponent } from '../charts/charts.component';
-import { isNullOrUndefined, isUndefined } from 'util';
-import { NavigationService } from 'src/services/Navigation/navigation.service';
+import { Component, OnInit } from "@angular/core";
+import { AngularFireDatabase } from "@angular/fire/database";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Module } from "../../models/Module";
+import { Observable } from "rxjs";
+import { DatabaseService } from "../../services/Database/database.service";
+import { SettingsService } from "../../services/Settings/settings.service";
+import { HttpClient } from "@angular/common/http";
+import { ChartsComponent } from "../charts/charts.component";
+import { isNullOrUndefined, isUndefined } from "util";
+import { NavigationService } from "src/app/services/Navigation/navigation.service";
 
 @Component({
-  selector: 'app-home-view',
-  templateUrl: './home-view.component.html',
-  styleUrls: ['./home-view.component.scss']
+  selector: "app-home-view",
+  templateUrl: "./home-view.component.html",
+  styleUrls: ["./home-view.component.scss"]
 })
 export class HomeViewComponent implements OnInit {
   modules: Array<Module>;
 
-  searchInput = '';
+  searchInput = "";
 
   public get modulesMatchSearchInput(): Module[] {
     if (isNullOrUndefined(this.searchInput) || this.searchInput.length === 0) {
@@ -43,7 +43,7 @@ export class HomeViewComponent implements OnInit {
 
   databaseObservable: Observable<any[]>;
   isVisible = false;
-  errorMessage = '';
+  errorMessage = "";
   isSuccess = false;
   public privateInputString: string;
 
@@ -56,12 +56,12 @@ export class HomeViewComponent implements OnInit {
     this.privateInputString = value.toUpperCase();
     if (keysCount > 17) {
       this.errorMessage =
-        'MAC address cannot be longer than 12 hexadecimal characters';
+        "MAC address cannot be longer than 12 hexadecimal characters";
     } else if (
       this.errorMessage ===
-      'MAC address cannot be longer than 12 hexadecimal characters'
+      "MAC address cannot be longer than 12 hexadecimal characters"
     ) {
-      this.errorMessage = '';
+      this.errorMessage = "";
     }
     if (
       keysCount === 3 ||
@@ -73,7 +73,7 @@ export class HomeViewComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this.privateInputString =
         this.inputString.substr(0, this.inputString.length - 1) +
-        ':' +
+        ":" +
         this.inputString[this.inputString.length - 1];
     }
   }
@@ -118,7 +118,7 @@ export class HomeViewComponent implements OnInit {
 
   backSpacePressed() {
     const stringLength = this.inputString.length;
-    if (this.inputString[stringLength - 2] === ':') {
+    if (this.inputString[stringLength - 2] === ":") {
       this.privateInputString = this.inputString.substr(0, stringLength - 1);
     }
   }
@@ -126,7 +126,7 @@ export class HomeViewComponent implements OnInit {
   handleCancel() {
     this.isVisible = false;
     this.isLoading = false;
-    this.errorMessage = '';
+    this.errorMessage = "";
     this.isSuccess = false;
   }
 
@@ -136,7 +136,7 @@ export class HomeViewComponent implements OnInit {
       !/(([0-9]|[A-F]){2}:){5}([0-9]|[A-F]){2}/.test(this.inputString) ||
       this.inputString.length !== 17
     ) {
-      this.errorMessage = 'Invalid MAC address. Please try again.';
+      this.errorMessage = "Invalid MAC address. Please try again.";
       this.isLoading = false;
       return;
     }
@@ -149,10 +149,10 @@ export class HomeViewComponent implements OnInit {
     }
     this.db
       .list(`modules/${this.inputString}`)
-      .query.once('value')
+      .query.once("value")
       .then(value => {
         if (isNullOrUndefined(value.val())) {
-          throw Error('MAC address not available.');
+          throw Error("MAC address not available.");
         }
         // tslint:disable-next-line: max-line-length
         let URL = `https://us-central1-fb-demo-a57e3.cloudfunctions.net/connectModule?UUID=${this.database.UUID}&MAC=${this.inputString}&order=${this.navigation.order}`;
@@ -168,14 +168,14 @@ export class HomeViewComponent implements OnInit {
           setTimeout(() => {
             // this.router.navigateByUrl(`portal/house/${this.navigation.order}`).catch(error => console.log(error));
             this.isLoading = false;
-            this.inputString = '';
+            this.inputString = "";
             this.isVisible = false;
             this.isSuccess = false;
           }, 2000);
         });
       })
       .catch(error => {
-        this.errorMessage = 'MAC address not available.';
+        this.errorMessage = "MAC address not available.";
         this.isLoading = false;
       });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatorService } from '../../../services/Authenticator/authenticator.service';
+import { AuthenticatorService } from '../../services/Authenticator/authenticator.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

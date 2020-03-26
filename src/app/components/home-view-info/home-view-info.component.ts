@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SettingsService } from '../../../services/Settings/settings.service';
-import { ViewportService } from '../../../services/Viewports/viewport.service';
-import { NavigationService } from 'src/services/Navigation/navigation.service';
+import { SettingsService } from '../../services/Settings/settings.service';
+import { ViewportService } from '../../services/Viewports/viewport.service';
 
 @Component({
   selector: 'app-home-view-info',

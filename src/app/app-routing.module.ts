@@ -5,7 +5,7 @@ import { HomeViewComponent } from "./components/home-view/home-view.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { PortalScreenComponent } from "./pages/portal-screen/portal-screen.component";
-import { LoginGuard } from "src/guards/login.guard";
+import { LoginGuard } from "src/app/guards/login.guard";
 
 const routes: Routes = [
   // { path: '', pathMatch: 'full', redirectTo: '/profile' },

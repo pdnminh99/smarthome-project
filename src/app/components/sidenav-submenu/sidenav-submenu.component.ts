@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DatabaseService } from '../../../services/Database/database.service';
-import { NavigationService } from 'src/services/Navigation/navigation.service';
-import { NavigationItem } from 'src/models/NavigationItem';
-import { Router } from '@angular/router';
+import { DatabaseService } from '../../services/Database/database.service';
+import { NavigationService } from 'src/app/services/Navigation/navigation.service';
 
 @Component({
   selector: 'app-sidenav-submenu',

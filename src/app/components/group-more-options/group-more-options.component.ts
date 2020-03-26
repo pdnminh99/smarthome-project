@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { DatabaseService } from '../../../services/Database/database.service';
-import { NavigationService } from 'src/services/Navigation/navigation.service';
+import { DatabaseService } from '../../services/Database/database.service';
+import { NavigationService } from 'src/app/services/Navigation/navigation.service';
 
 @Component({
   selector: 'app-group-more-options',
@@ -68,7 +68,7 @@ export class GroupMoreOptionsComponent implements OnInit {
       .get(
         `https://us-central1-fb-demo-a57e3.cloudfunctions.net/deleteGroup?order=${this.navigationService.order}&UUID=${this.database.UUID}`
       )
-      .subscribe(response => {
+      .subscribe(() => {
         // console.log(response);
         this.errorMessage = '';
         this.isSuccess = true;
